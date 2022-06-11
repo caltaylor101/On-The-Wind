@@ -746,17 +746,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameRun: {fileID: 0}
-  speed: 4.5
-  upwardSpeed: 2
-  maxVelocity: 5
+  speed: 5
+  upwardSpeed: 1
+  maxVelocity: 8
   maxSpeed: 5
   health: 1
+  turnSpeed: 1200
   playerTurnVariable: 0.75
   playerGetsHurt: 0
   slowDownBool: 0
   breakingEnabled: 0
   playerDefense: 0
-  windForce: 1000
+  windForce: 900
 --- !u!136 &371071674
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -850,6 +851,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 371071673}
+  maxSpeedMultiplier: 2
+  maxVelocityMultiplier: 2
 --- !u!1001 &407210557
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public class PlayerTriggers : MonoBehaviour
     // Start is called before the first frame update
     private string windTunnelTag = "WindTunnel";
     [SerializeField] private PlayerController playerController;
+    public float maxSpeedMultiplier = 2;
+    public float maxVelocityMultiplier = 2;
     void Start()
     {
         
@@ -22,8 +24,17 @@ public class PlayerTriggers : MonoBehaviour
     {
         if (trigger.tag == windTunnelTag)
         {
-            playerController.maxSpeed *= 3;
-            playerController.maxVelocity *= 3;
+            playerController.maxSpeed *= maxSpeedMultiplier;
+            playerController.maxVelocity *= maxVelocityMultiplier;
+        }
+    }
+
+    private void OnTriggerExit(Collider trigger)
+    {
+        if (trigger.tag == windTunnelTag)
+        {
+            playerController.maxSpeed /= maxSpeedMultiplier;
+            playerController.maxVelocity /= maxVelocityMultiplier;
         }
     }
 }
