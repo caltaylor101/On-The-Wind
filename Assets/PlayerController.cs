@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     public GameObject gameRun;
     [SerializeField] public float speed = 2f;
+    [SerializeField] public float upwardSpeed = 2f;
     // [SerializeField] public float turnSpeed = 100f;\
     [SerializeField] public float maxVelocity = 20f;
     [SerializeField] public float maxSpeed = 20f;
@@ -71,7 +72,7 @@ public class PlayerController : MonoBehaviour
     {
         ClickControls();
         ConstantMovement();
-        //WasdControls();
+        WasdControls();
 
 
         //thisRigidbody.AddForce(Vector3.down * speed * (thisRigidbody.mass / 1.5f), ForceMode.Force);
@@ -148,13 +149,11 @@ public class PlayerController : MonoBehaviour
         {
             mouseDownBool = true;
             firstMousePosition = Input.mousePosition;
-            Debug.Log(Input.mousePosition);
         }
         if (Input.GetMouseButtonUp(0))
         {
             mouseDownBool = false;
             secondMousePosition = Input.mousePosition;
-            Debug.Log(Input.mousePosition);
 
 
             // make wind force function here. 
@@ -163,28 +162,24 @@ public class PlayerController : MonoBehaviour
             if (firstMousePosition.y - secondMousePosition.y > 0)
             {
                 float powerCalculation = (windForce * firstMousePosition.y / Screen.height) - (windForce * secondMousePosition.y / Screen.height);
-                Debug.Log(powerCalculation);
                 thisRigidbody.AddForce(Vector3.down * powerCalculation, ForceMode.Acceleration);
             }
 
             if (firstMousePosition.y - secondMousePosition.y < 0)
             {
                 float powerCalculation = Mathf.Abs((windForce * firstMousePosition.y / Screen.height) - (windForce * secondMousePosition.y / Screen.height));
-                Debug.Log(powerCalculation);
                 thisRigidbody.AddForce(Vector3.up * powerCalculation, ForceMode.Acceleration);
             }
 
             if (firstMousePosition.x - secondMousePosition.x < 0)
             {
                 float powerCalculation = Mathf.Abs((windForce * firstMousePosition.x / Screen.width) - (windForce * secondMousePosition.x / Screen.width));
-                Debug.Log(powerCalculation);
                 thisRigidbody.AddForce(Vector3.right * powerCalculation, ForceMode.Acceleration);
             }
 
             if (firstMousePosition.x - secondMousePosition.x > 0)
             {
                 float powerCalculation = Mathf.Abs((windForce * firstMousePosition.x / Screen.width) - (windForce * secondMousePosition.x / Screen.width));
-                Debug.Log(powerCalculation);
                 thisRigidbody.AddForce(Vector3.left * powerCalculation, ForceMode.Acceleration);
             }
 
@@ -301,7 +296,7 @@ public class PlayerController : MonoBehaviour
 
     private void ConstantMovement()
     {
-        thisRigidbody.AddForce(Vector3.up * speed * Time.deltaTime, ForceMode.Force);
+        thisRigidbody.AddForce(Vector3.up * upwardSpeed * Time.deltaTime, ForceMode.Force);
 
         if (thisRigidbody.velocity.z < maxVelocity)
         {
