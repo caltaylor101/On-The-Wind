@@ -69,57 +69,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerControlInputs()
     {
-
-        if (Input.GetMouseButton(0) && !mouseDownBool)
-        {
-            mouseDownBool = true;
-            firstMousePosition = Input.mousePosition;
-            Debug.Log(Input.mousePosition);
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            mouseDownBool = false;
-            secondMousePosition = Input.mousePosition;
-            Debug.Log(Input.mousePosition);
-
-
-            // make wind force function here. 
-
-            // Move Player Down
-            if (firstMousePosition.y - secondMousePosition.y > 0)
-            {
-                float powerCalculation = (windForce * firstMousePosition.y / Screen.height) - (windForce * secondMousePosition.y / Screen.height);
-                Debug.Log(powerCalculation);
-                thisRigidbody.AddForce(Vector3.down * powerCalculation, ForceMode.Acceleration);
-            }
-
-            if (firstMousePosition.y - secondMousePosition.y < 0)
-            {
-                float powerCalculation = Mathf.Abs((windForce * firstMousePosition.y / Screen.height) - (windForce * secondMousePosition.y / Screen.height));
-                Debug.Log(powerCalculation);
-                thisRigidbody.AddForce(Vector3.up * powerCalculation, ForceMode.Acceleration);
-            }
-            
-            if (firstMousePosition.x - secondMousePosition.x < 0)
-            {
-                float powerCalculation = Mathf.Abs((windForce * firstMousePosition.x / Screen.width) - (windForce * secondMousePosition.x / Screen.width));
-                Debug.Log(powerCalculation);
-                thisRigidbody.AddForce(Vector3.right * powerCalculation, ForceMode.Acceleration);
-            }
-            
-            if (firstMousePosition.x - secondMousePosition.x > 0)
-            {
-                float powerCalculation = Mathf.Abs((windForce * firstMousePosition.x / Screen.width) - (windForce * secondMousePosition.x / Screen.width));
-                Debug.Log(powerCalculation);
-                thisRigidbody.AddForce(Vector3.left * powerCalculation, ForceMode.Acceleration);
-            }
-            
-        }
-
-
-        
-
-
+        ClickControls();
         ConstantMovement();
         //WasdControls();
 
@@ -192,6 +142,54 @@ public class PlayerController : MonoBehaviour
         }*/
     }
 
+    private void ClickControls()
+    {
+        if (Input.GetMouseButton(0) && !mouseDownBool)
+        {
+            mouseDownBool = true;
+            firstMousePosition = Input.mousePosition;
+            Debug.Log(Input.mousePosition);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            mouseDownBool = false;
+            secondMousePosition = Input.mousePosition;
+            Debug.Log(Input.mousePosition);
+
+
+            // make wind force function here. 
+
+            // Move Player Down
+            if (firstMousePosition.y - secondMousePosition.y > 0)
+            {
+                float powerCalculation = (windForce * firstMousePosition.y / Screen.height) - (windForce * secondMousePosition.y / Screen.height);
+                Debug.Log(powerCalculation);
+                thisRigidbody.AddForce(Vector3.down * powerCalculation, ForceMode.Acceleration);
+            }
+
+            if (firstMousePosition.y - secondMousePosition.y < 0)
+            {
+                float powerCalculation = Mathf.Abs((windForce * firstMousePosition.y / Screen.height) - (windForce * secondMousePosition.y / Screen.height));
+                Debug.Log(powerCalculation);
+                thisRigidbody.AddForce(Vector3.up * powerCalculation, ForceMode.Acceleration);
+            }
+
+            if (firstMousePosition.x - secondMousePosition.x < 0)
+            {
+                float powerCalculation = Mathf.Abs((windForce * firstMousePosition.x / Screen.width) - (windForce * secondMousePosition.x / Screen.width));
+                Debug.Log(powerCalculation);
+                thisRigidbody.AddForce(Vector3.right * powerCalculation, ForceMode.Acceleration);
+            }
+
+            if (firstMousePosition.x - secondMousePosition.x > 0)
+            {
+                float powerCalculation = Mathf.Abs((windForce * firstMousePosition.x / Screen.width) - (windForce * secondMousePosition.x / Screen.width));
+                Debug.Log(powerCalculation);
+                thisRigidbody.AddForce(Vector3.left * powerCalculation, ForceMode.Acceleration);
+            }
+
+        }
+    }
 
     public void PlayerStopped()
     {
