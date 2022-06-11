@@ -159,6 +159,12 @@ public class PlayerController : MonoBehaviour
         {
             thisRigidbody.position += Vector3.back * Time.deltaTime * speed;
         }*/
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            //thisRigidbody.AddForce(Vector3.left * Time.deltaTime * turnSpeed);
+            thisRigidbody.AddForce(Vector3.up * Time.deltaTime * turnSpeed * thisRigidbody.mass * playerTurnVariable);
+        }
         if (Input.GetKey(KeyCode.A))
         {
             //thisRigidbody.AddForce(Vector3.left * Time.deltaTime * turnSpeed);
