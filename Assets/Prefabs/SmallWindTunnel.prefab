@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2763118728706679775}
   - component: {fileID: 1985320530073232198}
   m_Layer: 0
-  m_Name: WindTunnel
+  m_Name: SmallWindTunnel
   m_TagString: WindTunnel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
