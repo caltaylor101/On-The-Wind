@@ -54,6 +54,10 @@ public class PlayerTriggers : MonoBehaviour
 
     private void OnTriggerEnter(Collider trigger)
     {
+        if (trigger.tag == "MaxHeightTrigger")
+        {
+            playerController.maxHeightTrigger = 12;
+        }
         if ((trigger.tag == windTunnelTag) && windTunnelEnter == false)
         {
             windTunnelEnter = true;
@@ -67,16 +71,13 @@ public class PlayerTriggers : MonoBehaviour
             playerController.thisRigidbody.AddForce(Vector3.up * verticalWindPower);
             //playerController.maxVelocity *= verticalWindPower;
         }
-
-
-
         if ((trigger.tag == "AnimationTrigger1"))
         {
             if (!destinationTriggered)
             {
                 animationStart = true;
             }
-            playerController.animationDelay = 2;
+            playerController.animationDelay = 1;
             playerController.newAnimationBool = true;
             playerController.thisRigidbody.useGravity = false;
             playerController.thisRigidbody.velocity *= 0;
@@ -86,8 +87,6 @@ public class PlayerTriggers : MonoBehaviour
             if ((transform.position == destination) && destinationTriggered)
             {
             }
-
-
         }
 
 

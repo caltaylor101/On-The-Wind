@@ -11,6 +11,8 @@ TagManager:
   - BackwardBounce
   - VerticalWindTunnel
   - AnimationTrigger1
+  - MaxHeightTrigger
+  - FluffCollectable
   layers:
   - Default
   - TransparentFX

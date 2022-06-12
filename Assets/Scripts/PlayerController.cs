@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
     private float baseSpeed = 1;
     public float animationDelay = 2;
+
+    public float maxHeightTrigger = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +83,15 @@ public class PlayerController : MonoBehaviour
         {
             PlayerControlInputs();
         }
+
+        if (transform.position.y > maxHeightTrigger)
+        {
+            float delta = 10 * Time.deltaTime;
+            Vector3 currentPosition = transform.position;
+            Vector3 nextPosition = Vector3.MoveTowards(currentPosition, new Vector3 (currentPosition.x, maxHeightTrigger, currentPosition.z), delta);
+            transform.position = nextPosition;
+        }
+
 
 
         // checks if player is stopped
@@ -270,7 +281,7 @@ public class PlayerController : MonoBehaviour
         if (thisRigidbody.useGravity)
         {
 
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) && transform.position.y < maxHeightTrigger)
             {
                 //thisRigidbody.AddForce(Vector3.left * Time.deltaTime * turnSpeed);
                 thisRigidbody.AddForce(Vector3.up * Time.deltaTime * turnSpeed * thisRigidbody.mass * playerTurnVariable);
