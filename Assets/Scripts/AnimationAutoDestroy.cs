@@ -11,6 +11,11 @@ public class AnimationAutoDestroy : MonoBehaviour
     {
         Destroy(GetComponent<Animator>(), this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
     }
+
+    public void DestroyAnimator()
+    {
+        Destroy(GetComponent<Animator>(), this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
+    }
     // Update is called once per frame
     void Update()
     {

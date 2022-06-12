@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     //Remember to add gravity to the player for movement.
     //Also set animator to true if no animator starts the player.
-    [SerializeField] private bool animatorNull = false;
+    [SerializeField] public bool animatorNull = false;
 
     public float stamina = 100;
     public GameObject gameRun;
@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     //power up variables
     public bool playerDefense = false;
+    public bool newAnimationBool = false;
 
 
     //for wind drag controls
@@ -46,10 +47,11 @@ public class PlayerController : MonoBehaviour
 
 
     private float baseSpeed = 1;
-
+    public float animationDelay = 2;
     // Start is called before the first frame update
     void Start()
     {
+        animationDelay = 2;
         gameObject.SetActive(true);
         //Variables we may need to keep track of when we create save scripts
         /*
@@ -72,10 +74,10 @@ public class PlayerController : MonoBehaviour
             animatorNull = true;
             thisRigidbody.AddForce(Vector3.forward * 5);
 
-            Invoke("AfterAnimationForce", 2);
+            Invoke("AfterAnimationForce", animationDelay );
             //thisRigidbody.AddForce(Vector3.up * 15, ForceMode.Acceleration);
         }
-        if (animatorNull)
+        if (animatorNull || newAnimationBool)
         {
             PlayerControlInputs();
         }
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour
 
     private void AfterAnimationForce()
     {
+        Debug.Log("triggered animation force");
         thisRigidbody.useGravity = true;
     }
 

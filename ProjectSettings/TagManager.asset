@@ -9,6 +9,8 @@ TagManager:
   - Bounce
   - ForwardBounce
   - BackwardBounce
+  - VerticalWindTunnel
+  - AnimationTrigger1
   layers:
   - Default
   - TransparentFX

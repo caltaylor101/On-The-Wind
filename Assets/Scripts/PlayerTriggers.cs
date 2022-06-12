@@ -6,9 +6,17 @@ public class PlayerTriggers : MonoBehaviour
 {
     // Start is called before the first frame update
     private string windTunnelTag = "WindTunnel";
+    private string verticalWindTunnelTag = "VerticalWindTunnel";
     [SerializeField] private PlayerController playerController;
     [SerializeField] private float windPower;
+    [SerializeField] private float verticalWindPower;
+    [SerializeField] private RuntimeAnimatorController prologueScene;
     private bool windTunnelEnter = false;
+    private bool verticalWindTunnelEnter = false;
+
+    private bool animationStart = false;
+    private bool destinationTriggered = false;
+    private Vector3 destination = new Vector3(-11.56f, 12.32f, 94.34f);
     void Start()
     {
         
@@ -17,7 +25,31 @@ public class PlayerTriggers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (destinationTriggered)
+        {
+            destinationTriggered = false;
+            Animation1Start();
+        }
+
+    }
+
+    private void LateUpdate()
+    {
+        if (animationStart)
+        {
+            //Invoke("AnimationForce", 4);
+            //playerController.animatorNull = false;
+            float delta = 3 * Time.deltaTime;
+            Vector3 currentPosition = transform.position;
+            Vector3 nextPosition = Vector3.MoveTowards(currentPosition, destination, delta);
+            transform.position = nextPosition;
+            if (currentPosition == destination)
+            {
+                Debug.Log("DESTINATION TRIGGERED");
+                destinationTriggered = true;
+                animationStart = false;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider trigger)
@@ -28,7 +60,65 @@ public class PlayerTriggers : MonoBehaviour
             playerController.maxSpeed *= windPower;
             playerController.maxVelocity *= windPower;
         }
+
+        if ((trigger.tag == verticalWindTunnelTag) && verticalWindTunnelEnter == false)
+        {
+            //windTunnelEnter = true;
+            playerController.thisRigidbody.AddForce(Vector3.up * verticalWindPower);
+            //playerController.maxVelocity *= verticalWindPower;
+        }
+
+
+
+        if ((trigger.tag == "AnimationTrigger1"))
+        {
+            if (!destinationTriggered)
+            {
+                animationStart = true;
+            }
+            playerController.animationDelay = 2;
+            playerController.newAnimationBool = true;
+            playerController.thisRigidbody.useGravity = false;
+            playerController.thisRigidbody.velocity *= 0;
+            playerController.speed *= 0;
+
+
+            if ((transform.position == destination) && destinationTriggered)
+            {
+            }
+
+
+        }
+
+
+
     }
+
+    private void Animation1Start()
+    {
+        //playerController.animatorNull = false;
+
+        if (playerController.thisRigidbody.useGravity)
+        {
+            playerController.thisRigidbody.useGravity = false;
+        }
+        GetComponent<Rigidbody>().useGravity = false;
+        gameObject.AddComponent<Animator>();
+        
+        GetComponent<Animator>().runtimeAnimatorController = prologueScene;
+        playerController.newAnimationBool = false;
+        playerController.animatorNull = false;
+        playerController.speed = 1;
+
+    }
+
+    private void AnimationForce()
+    {
+        playerController.thisRigidbody.AddForce(Vector3.forward * 5);
+        playerController.thisRigidbody.useGravity = true;
+
+    }
+
 
     private void OnTriggerExit(Collider trigger)
     {
