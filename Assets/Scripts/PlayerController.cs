@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //Remember to add gravity to the player for movement.
+    //Also set animator to true if no animator starts the player.
+    [SerializeField] private bool animatorNull = false;
+
+    public float stamina = 100;
     public GameObject gameRun;
     [SerializeField] public float speed = 2f;
     [SerializeField] public float upwardSpeed = 2f;
     // [SerializeField] public float turnSpeed = 100f;\
     [SerializeField] public float maxVelocity = 20f;
     [SerializeField] public float maxSpeed = 20f;
+    [SerializeField] public float dropForce = 20f;
     public int health = 1;
     private float turnSpeed = 900f;
     public float playerTurnVariable = .75f;
@@ -40,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    private bool animatorNull = false;
+    private float baseSpeed = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -266,6 +271,11 @@ public class PlayerController : MonoBehaviour
             {
                 //thisRigidbody.AddForce(Vector3.left * Time.deltaTime * turnSpeed);
                 thisRigidbody.AddForce(Vector3.up * Time.deltaTime * turnSpeed * thisRigidbody.mass * playerTurnVariable);
+                stamina -= Time.deltaTime * 5;
+            }
+            else
+            {
+                stamina += Time.deltaTime * 1;
             }
         }
         if (Input.GetKey(KeyCode.A))
@@ -282,8 +292,19 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.S) && breakingEnabled)
         {
             slowDownBool = true;
-            thisRigidbody.AddForce(-Vector3.forward * speed * massSlowDownVariable * thisRigidbody.mass, ForceMode.Force);
+            thisRigidbody.AddForce(Vector3.down * speed * massSlowDownVariable * thisRigidbody.mass, ForceMode.Force);
             //GetComponent<Rigidbody>().velocity *= .3f;
+        }
+
+        if (Input.GetKeyDown("space"))
+        {
+            speed = 0;
+            thisRigidbody.velocity *= 0.1f;
+            thisRigidbody.AddForce(Vector3.down * dropForce);
+        }
+        if (Input.GetKeyUp("space"))
+        {
+            speed = baseSpeed;
         }
     }
 
@@ -291,7 +312,7 @@ public class PlayerController : MonoBehaviour
     {
         thisRigidbody.AddForce(Vector3.up * upwardSpeed * Time.deltaTime, ForceMode.Force);
 
-        if (thisRigidbody.velocity.z < maxVelocity)
+        if ((thisRigidbody.velocity.z < maxVelocity) && !Input.GetKeyDown("space"))
         {
             if (thisRigidbody.velocity.z < maxVelocity / 2)
             {
