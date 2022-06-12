@@ -7,6 +7,8 @@ public class PlayerTriggers : MonoBehaviour
     // Start is called before the first frame update
     private string windTunnelTag = "WindTunnel";
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private float windPower;
+    private bool windTunnelEnter = false;
     void Start()
     {
         
@@ -20,10 +22,25 @@ public class PlayerTriggers : MonoBehaviour
 
     private void OnTriggerEnter(Collider trigger)
     {
-        if (trigger.tag == windTunnelTag)
+        if ((trigger.tag == windTunnelTag) && windTunnelEnter == false)
         {
-            playerController.maxSpeed *= 3;
-            playerController.maxVelocity *= 3;
+            windTunnelEnter = true;
+            playerController.maxSpeed *= windPower;
+            playerController.maxVelocity *= windPower;
         }
     }
+
+    private void OnTriggerExit(Collider trigger)
+    {
+        if ((trigger.tag == windTunnelTag) && windTunnelEnter == true)
+        {
+            windTunnelEnter = false;
+            playerController.speed /= windPower;
+            playerController.maxSpeed /= windPower;
+            playerController.maxVelocity /= windPower;
+            playerController.thisRigidbody.velocity /= windPower;
+        }
+    }
+
+
 }

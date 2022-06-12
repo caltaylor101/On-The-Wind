@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private float horizontalInput;
     private float forwardInput;
-    private Rigidbody thisRigidbody;
+    public Rigidbody thisRigidbody;
     private float screenCenterX;
 
     private bool playerHitObstacle = false;
@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
         maxSpeed = GetComponent<PlayerUpgradeVariables>().playerMaxSpeed;
         maxVelocity = GetComponent<PlayerUpgradeVariables>().playerMaxSpeed;
         */
-
         screenCenterX = Screen.width * 0.5f;
         thisRigidbody = GetComponent<Rigidbody>();
         //thisRigidbody.velocity = new Vector3(2, 2, 2);
@@ -64,9 +63,11 @@ public class PlayerController : MonoBehaviour
 
         if (GetComponent<Animator>() == null && !animatorNull)
         {
+            //thisRigidbody.AddForce(Vector3.up * 5, ForceMode.Acceleration);
             animatorNull = true;
-            thisRigidbody.useGravity = true;
             thisRigidbody.AddForce(Vector3.forward * 5);
+
+            Invoke("AfterAnimationForce", 2);
             //thisRigidbody.AddForce(Vector3.up * 15, ForceMode.Acceleration);
         }
         if (animatorNull)
@@ -85,8 +86,7 @@ public class PlayerController : MonoBehaviour
 
     private void AfterAnimationForce()
     {
-        thisRigidbody.AddForce(Vector3.up * 5, ForceMode.Acceleration);
-
+        thisRigidbody.useGravity = true;
     }
 
     private void PlayerControlInputs()
@@ -94,10 +94,7 @@ public class PlayerController : MonoBehaviour
         ClickControls();
         ConstantMovement();
         WasdControls();
-
-
         //thisRigidbody.AddForce(Vector3.down * speed * (thisRigidbody.mass / 1.5f), ForceMode.Force);
-
         /*if (Input.GetKey(KeyCode.W))
         {
             transform.position += Vector3.forward * Time.deltaTime * speed;
@@ -106,37 +103,25 @@ public class PlayerController : MonoBehaviour
         {
             thisRigidbody.position += Vector3.back * Time.deltaTime * speed;
         }*/
-
-
-
-
         /*
         if (Input.touchCount > 0)
         {
             // get the first one
             Touch firstTouch = Input.GetTouch(0);
-
-
             if (breakingEnabled)
             {
-
                 if (firstTouch.position.x > screenCenterX && (firstTouch.position.y > Screen.height / 5))
                 {
                     // if the touch position is to the right of center
                     thisRigidbody.AddForce(Vector3.right * Time.deltaTime * turnSpeed * thisRigidbody.mass * playerTurnVariable);
-
                     // move right
-
                 }
                 if (firstTouch.position.x < screenCenterX && (firstTouch.position.y > Screen.height / 5))
                 {
                     // if the touch position is to the left of center
                     // move left
                     thisRigidbody.AddForce(Vector3.left * Time.deltaTime * turnSpeed * thisRigidbody.mass * playerTurnVariable);
-
                 }
-
-
                 if ((firstTouch.position.y < Screen.height / 5))
                 {
                     slowDownBool = true;
@@ -149,16 +134,13 @@ public class PlayerController : MonoBehaviour
                 {
                     // if the touch position is to the right of center
                     thisRigidbody.AddForce(Vector3.right * Time.deltaTime * turnSpeed * thisRigidbody.mass * playerTurnVariable);
-
                     // move right
-
                 }
                 if (firstTouch.position.x < screenCenterX)
                 {
                     // if the touch position is to the left of center
                     // move left
                     thisRigidbody.AddForce(Vector3.left * Time.deltaTime * turnSpeed * thisRigidbody.mass * playerTurnVariable);
-
                 }
             }
         }*/
@@ -231,30 +213,16 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider trigger)
     {
         // possible start to logic if we want obstacles to slow the player down. 
-        if (other.gameObject.tag == "Slow" && !slowDownBool)
-        {
-            slowDownBool = true;
-            GetComponent<Rigidbody>().velocity *= .3f;
-            if (speed >= 1)
-            {
-                speed -= 1;
-            }
-        }
 
     }
 
     private void OnTriggerExit(Collider other)
     {
 
-        if (other.gameObject.tag == "Slow")
-        {
-            slowDownBool = false;
-        }
     }
-
     private void HitObstacle(Collision collision)
     {
         if (collision.gameObject.tag == "Obstacle" && !playerHitObstacle)
@@ -291,10 +259,14 @@ public class PlayerController : MonoBehaviour
 
     private void WasdControls()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (thisRigidbody.useGravity)
         {
-            //thisRigidbody.AddForce(Vector3.left * Time.deltaTime * turnSpeed);
-            thisRigidbody.AddForce(Vector3.up * Time.deltaTime * turnSpeed * thisRigidbody.mass * playerTurnVariable);
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                //thisRigidbody.AddForce(Vector3.left * Time.deltaTime * turnSpeed);
+                thisRigidbody.AddForce(Vector3.up * Time.deltaTime * turnSpeed * thisRigidbody.mass * playerTurnVariable);
+            }
         }
         if (Input.GetKey(KeyCode.A))
         {
