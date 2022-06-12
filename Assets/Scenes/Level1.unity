@@ -672,8 +672,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 109755139}
-  forwardBounceForce: 35
-  backwardBounceForce: 35
+  forwardBounceForce: 25
+  backwardBounceForce: 60
 --- !u!114 &109755138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,11 +701,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorNull: 1
+  stamina: 100
   gameRun: {fileID: 0}
   speed: 1
   upwardSpeed: 4
   maxVelocity: 4
   maxSpeed: 4
+  dropForce: 20
   health: 1
   playerTurnVariable: 0.75
   thisRigidbody: {fileID: 0}
@@ -722,7 +724,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109755129}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.9, y: 6.9506617, z: 75.770035}
+  m_LocalPosition: {x: -6.77, y: 6.92, z: 56.48}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12278,14 +12280,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036861985}
-  m_LocalRotation: {x: -0.27667063, y: -0, z: -0, w: 0.9609648}
-  m_LocalPosition: {x: -12.9, y: 1.87, z: 85.81}
+  m_LocalRotation: {x: -0.34836844, y: -0, z: -0, w: 0.93735766}
+  m_LocalPosition: {x: -12.9, y: 2.33, z: 83.6}
   m_LocalScale: {x: 5, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: -32.123, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -40.775, y: 0, z: 0}
 --- !u!4 &1074991137 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 451222, guid: 87c54cc8d93d51b4caa889c5e9db863e, type: 3}
@@ -12982,7 +12984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2097822130608838366, guid: a12b12e0d3ed1944a8786ee292d51dda, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.810487
+      value: 7.68
       objectReference: {fileID: 0}
     - target: {fileID: 2097822130608838366, guid: a12b12e0d3ed1944a8786ee292d51dda, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14202,11 +14204,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorNull: 0
+  stamina: 100
   gameRun: {fileID: 0}
   speed: 3
   upwardSpeed: 4
   maxVelocity: 4
   maxSpeed: 4
+  dropForce: 20
   health: 1
   playerTurnVariable: 0.75
   thisRigidbody: {fileID: 0}
