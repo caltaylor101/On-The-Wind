@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour
     // This variable should probably be looked over and changed later
     public int windForce = 150;
 
+
+
+    private bool animatorNull = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,7 +62,18 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        PlayerControlInputs();
+        if (GetComponent<Animator>() == null && !animatorNull)
+        {
+            animatorNull = true;
+            thisRigidbody.useGravity = true;
+            thisRigidbody.AddForce(Vector3.forward * 5);
+            //thisRigidbody.AddForce(Vector3.up * 15, ForceMode.Acceleration);
+        }
+        if (animatorNull)
+        {
+            PlayerControlInputs();
+        }
+
 
         // checks if player is stopped
         /*
@@ -66,6 +81,12 @@ public class PlayerController : MonoBehaviour
         {
             Invoke("PlayerStopped", 3);
         }*/
+    }
+
+    private void AfterAnimationForce()
+    {
+        thisRigidbody.AddForce(Vector3.up * 5, ForceMode.Acceleration);
+
     }
 
     private void PlayerControlInputs()
