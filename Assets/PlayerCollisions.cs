@@ -14,6 +14,7 @@ public class PlayerCollisions : MonoBehaviour
     private int baseSpeed = 1;
 
     [SerializeField] private float forwardBounceForce = 35;
+    [SerializeField] private float bounceForce = 80;
     [SerializeField] private float backwardBounceForce = 35;
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,11 @@ public class PlayerCollisions : MonoBehaviour
         {
             playerController.thisRigidbody.AddForce(Vector3.forward * forwardBounceForce);
             playerController.thisRigidbody.AddForce(Vector3.up * forwardBounceForce);
+            playerController.stamina = 100; 
+        }
+        if ((collision.gameObject.tag == bounceTag))
+        {
+            playerController.thisRigidbody.AddForce(Vector3.up * bounceForce);
             playerController.stamina = 100; 
         }
 

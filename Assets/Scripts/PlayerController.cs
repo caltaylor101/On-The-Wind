@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("triggered animation force");
         thisRigidbody.useGravity = true;
+        speed = 1.1f;
     }
 
     private void PlayerControlInputs()
@@ -334,5 +335,7 @@ public class PlayerController : MonoBehaviour
             }
             thisRigidbody.AddForce(Vector3.forward * speed, ForceMode.Acceleration);
         }
+
+        
     }
 }

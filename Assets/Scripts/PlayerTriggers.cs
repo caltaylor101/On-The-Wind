@@ -82,15 +82,12 @@ public class PlayerTriggers : MonoBehaviour
             playerController.thisRigidbody.useGravity = false;
             playerController.thisRigidbody.velocity *= 0;
             playerController.speed *= 0;
-
-
-            if ((transform.position == destination) && destinationTriggered)
-            {
-            }
         }
 
-
-
+        if (trigger.tag == "FluffCollectable")
+        {
+            Destroy(trigger.gameObject);
+        }
     }
 
     private void Animation1Start()
