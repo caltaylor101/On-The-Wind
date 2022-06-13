@@ -56,7 +56,8 @@ public class PlayerTriggers : MonoBehaviour
     {
         if (trigger.tag == "MaxHeightTrigger")
         {
-            playerController.maxHeightTrigger = 12;
+            
+            playerController.maxHeightTrigger = trigger.gameObject.GetComponent<HeightTriggerVariables>().maxHeightTrigger;
         }
         if ((trigger.tag == windTunnelTag) && windTunnelEnter == false)
         {

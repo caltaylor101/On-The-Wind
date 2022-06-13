@@ -84,13 +84,7 @@ public class PlayerController : MonoBehaviour
             PlayerControlInputs();
         }
 
-        if (transform.position.y > maxHeightTrigger)
-        {
-            float delta = 10 * Time.deltaTime;
-            Vector3 currentPosition = transform.position;
-            Vector3 nextPosition = Vector3.MoveTowards(currentPosition, new Vector3 (currentPosition.x, maxHeightTrigger, currentPosition.z), delta);
-            transform.position = nextPosition;
-        }
+       
 
 
 
@@ -100,6 +94,17 @@ public class PlayerController : MonoBehaviour
         {
             Invoke("PlayerStopped", 3);
         }*/
+    }
+
+    private void LateUpdate()
+    {
+        if (transform.position.y > maxHeightTrigger)
+        {
+            float delta = 50 * Time.deltaTime;
+            Vector3 currentPosition = transform.position;
+            Vector3 nextPosition = Vector3.MoveTowards(currentPosition, new Vector3(currentPosition.x, maxHeightTrigger, currentPosition.z), delta);
+            transform.position = nextPosition;
+        }
     }
 
     private void AfterAnimationForce()
@@ -320,6 +325,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp("space"))
         {
             speed = baseSpeed;
+        }
+
+        if (animatorNull && speed < 1.5f)
+        {
+            speed += 2 * Time.deltaTime;
         }
     }
 
