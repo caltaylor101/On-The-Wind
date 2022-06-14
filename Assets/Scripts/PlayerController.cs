@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     //Remember to add gravity to the player for movement.
     //Also set animator to true if no animator starts the player.
+    public bool testCoroutine;
     [SerializeField] public bool animatorNull = false;
 
     public float stamina = 100;
@@ -53,9 +54,23 @@ public class PlayerController : MonoBehaviour
     public float maxHeightTrigger = 100;
 
     private bool maxHeightForceCorrection = false;
+
+
+    // rotation
+    private Quaternion originalRotation;
+    private float rotateSpeed = 1f;
+    public bool restoreRotation = false;
+    public bool restoreRotationTriggered = false;
+    private bool closeRotation = false;
+    private bool forceBack = false;
+   
+
+
     // Start is called before the first frame update
     void Start()
     {
+        originalRotation = transform.rotation;
+
         animationDelay = 2;
         gameObject.SetActive(true);
         //Variables we may need to keep track of when we create save scripts
@@ -104,6 +119,10 @@ public class PlayerController : MonoBehaviour
         {
             Invoke("PlayerStopped", 3);
         }*/
+
+
+        
+
     }
 
     private void LateUpdate()
@@ -232,9 +251,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void RestoreRotation()
+    {
+        restoreRotation = true;
+        restoreRotationTriggered = false;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         HitObstacle(collision);
+
+        if (!restoreRotationTriggered)
+        {
+            restoreRotationTriggered = true;
+            CancelInvoke("RestoreRestoration");
+            Invoke("RestoreRotation", 3);
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -355,6 +387,38 @@ public class PlayerController : MonoBehaviour
             thisRigidbody.AddForce(Vector3.forward * speed, ForceMode.Acceleration);
         }
 
-        
+
+        // this allows consistent rotation and resets the dandelion to a starting position after a set time. 
+        if (restoreRotation)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, originalRotation, Time.deltaTime * rotateSpeed);
+
+            //Debug.Log("Z difference" + (FindDifference(transform.rotation.z, originalRotation.z)));
+            //Debug.Log("y difference" + (FindDifference(transform.rotation.y, originalRotation.y)));
+            //Debug.Log("x difference" + (FindDifference(transform.rotation.x, originalRotation.x)));
+            if ((FindDifference(transform.rotation.z, originalRotation.z) < .1f) && (FindDifference(transform.rotation.x, originalRotation.x) < .1f) && (FindDifference(transform.rotation.y, originalRotation.y) < .1f))
+            {
+                transform.rotation = originalRotation; 
+            }
+            thisRigidbody.freezeRotation = true;
+            if (transform.rotation == originalRotation)
+            {
+                restoreRotation = false;
+                thisRigidbody.freezeRotation = false;
+
+            }
+        }
+
+
+        if (!restoreRotation && !restoreRotationTriggered)
+        {
+            transform.Rotate(new Vector3(10, 20, 10) * Time.deltaTime * 2);
+        }
+
     }
+    public float FindDifference(float nr1, float nr2)
+        {
+            return Mathf.Abs(nr1 - nr2);
+        }
+ 
 }
