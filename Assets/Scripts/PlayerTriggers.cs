@@ -101,8 +101,8 @@ public class PlayerTriggers : MonoBehaviour
 
         if (trigger.tag == "Speed")
         {
-            playerController.baseSpeed *= 5;
-            playerController.maxVelocity *= 4;
+            playerController.baseSpeed *= 2;
+            playerController.maxVelocity *= 2;
             Destroy(part1);
             Destroy(part3);
             Destroy(GameObject.Find("Part2"));

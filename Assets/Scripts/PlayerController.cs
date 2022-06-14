@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
 
     public float stamina = 100;
     public GameObject gameRun;
+
+
+    public float baseSpeed = 1;
     [SerializeField] public float speed = 2f;
     [SerializeField] public float upwardSpeed = 2f;
     // [SerializeField] public float turnSpeed = 100f;\
@@ -48,7 +51,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-    public float baseSpeed = 1;
     public float animationDelay = 2;
 
     public float maxHeightTrigger = 100;
@@ -63,7 +65,9 @@ public class PlayerController : MonoBehaviour
     public bool restoreRotationTriggered = false;
     private bool closeRotation = false;
     private bool forceBack = false;
-   
+
+
+    private float secondsStopped = 3;
 
 
     // Start is called before the first frame update
@@ -409,6 +413,23 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (thisRigidbody.velocity.z < 1f)
+        {
+            secondsStopped -= Time.deltaTime;
+            if (secondsStopped <= 0)
+            {
+                thisRigidbody.AddForce(Vector3.back * 55);
+                thisRigidbody.AddForce(Vector3.up * 45);
+                secondsStopped = 2;
+            }
+
+        }
+
+        if (thisRigidbody.velocity.z > 1f)
+        {
+            secondsStopped = 2;
+
+        }
 
         if (!restoreRotation && !restoreRotationTriggered)
         {
