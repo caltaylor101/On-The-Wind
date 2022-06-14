@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerTriggers : MonoBehaviour
 {
+    [SerializeField] private GameObject part1;
+    [SerializeField] private GameObject part3;
     // Start is called before the first frame update
     private string windTunnelTag = "WindTunnel";
     private string verticalWindTunnelTag = "VerticalWindTunnel";
@@ -43,6 +45,7 @@ public class PlayerTriggers : MonoBehaviour
             Vector3 currentPosition = transform.position;
             Vector3 nextPosition = Vector3.MoveTowards(currentPosition, destination, delta);
             transform.position = nextPosition;
+            playerController.speed *= 0;
             if (currentPosition == destination)
             {
                 Debug.Log("DESTINATION TRIGGERED");
@@ -88,6 +91,18 @@ public class PlayerTriggers : MonoBehaviour
         if (trigger.tag == "FluffCollectable")
         {
             Destroy(trigger.gameObject);
+        }
+
+        if (trigger.tag == "LevelLoad")
+        {
+            part1.SetActive(false);
+            part3.SetActive(true);
+        }
+
+        if (trigger.tag == "Speed")
+        {
+            playerController.baseSpeed *= 5;
+            playerController.maxVelocity *= 4;
         }
     }
 

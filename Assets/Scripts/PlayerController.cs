@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float maxVelocity = 20f;
     [SerializeField] public float maxSpeed = 20f;
     [SerializeField] public float dropForce = 20f;
+    [SerializeField] public float staminaDecreaseRate = 10f;
     public int health = 1;
     private float turnSpeed = 900f;
     public float playerTurnVariable = .75f;
@@ -46,10 +47,12 @@ public class PlayerController : MonoBehaviour
 
 
 
-    private float baseSpeed = 1;
+    public float baseSpeed = 1;
     public float animationDelay = 2;
 
     public float maxHeightTrigger = 100;
+
+    private bool maxHeightForceCorrection = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -84,7 +87,14 @@ public class PlayerController : MonoBehaviour
             PlayerControlInputs();
         }
 
-       
+        if (transform.position.y > maxHeightTrigger)
+        {
+            maxHeightForceCorrection = true;
+            float delta = 10 * Time.deltaTime;
+            Vector3 currentPosition = transform.position;
+            Vector3 nextPosition = Vector3.MoveTowards(currentPosition, new Vector3(currentPosition.x, maxHeightTrigger, currentPosition.z), delta);
+            transform.position = nextPosition;
+        }
 
 
 
@@ -98,13 +108,12 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (transform.position.y > maxHeightTrigger)
+        
+        /* if (maxHeightForceCorrection && transform.position.y < maxHeightTrigger)
         {
-            float delta = 50 * Time.deltaTime;
-            Vector3 currentPosition = transform.position;
-            Vector3 nextPosition = Vector3.MoveTowards(currentPosition, new Vector3(currentPosition.x, maxHeightTrigger, currentPosition.z), delta);
-            transform.position = nextPosition;
-        }
+            maxHeightForceCorrection = false;
+            thisRigidbody.AddForce(Vector3.up * 1);
+        }*/
     }
 
     private void AfterAnimationForce()
@@ -291,7 +300,7 @@ public class PlayerController : MonoBehaviour
             {
                 //thisRigidbody.AddForce(Vector3.left * Time.deltaTime * turnSpeed);
                 thisRigidbody.AddForce(Vector3.up * Time.deltaTime * turnSpeed * thisRigidbody.mass * playerTurnVariable);
-                stamina -= Time.deltaTime * 5;
+                stamina -= Time.deltaTime * staminaDecreaseRate;
             }
             else
             {
@@ -327,7 +336,7 @@ public class PlayerController : MonoBehaviour
             speed = baseSpeed;
         }
 
-        if (animatorNull && speed < 1.5f)
+        if (animatorNull && speed < baseSpeed)
         {
             speed += 2 * Time.deltaTime;
         }
