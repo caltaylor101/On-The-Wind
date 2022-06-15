@@ -63,6 +63,7 @@ public class UI_TutorialMsg : MonoBehaviour
     StartCoroutine(FadeIn());
   }
 
+
   public void DeactivateMessage()
   {
     if (DebugFlip)
