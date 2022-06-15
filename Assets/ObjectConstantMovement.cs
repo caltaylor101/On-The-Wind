@@ -21,6 +21,8 @@ public class ObjectConstantMovement : MonoBehaviour
     [SerializeField] private float dandelionMaxRight;
     [SerializeField] private float dandelionForceRight;
     [SerializeField] private float distanceFromPlayer;
+    public bool targeted = false;
+    public bool repositionDandelion = false;
     void Start()
     {
         thisRigidbody = GetComponent<Rigidbody>();
@@ -92,7 +94,7 @@ public class ObjectConstantMovement : MonoBehaviour
         }
 
 
-        transform.Rotate(new Vector3(1, 1, 5) * Time.deltaTime * rotateSpeed);
+        transform.Rotate(new Vector3(0, 1, 0) * Time.deltaTime * rotateSpeed);
 
         if (transform.position.x < playerController.transform.position.x - dandelionMaxRight)
         {
@@ -104,10 +106,18 @@ public class ObjectConstantMovement : MonoBehaviour
             thisRigidbody.AddForce(Vector3.left * Time.deltaTime * dandelionForceLeft);
         }
 
-        if ((transform.position.x < playerController.transform.position.x + .5f) && (transform.position.x > playerController.transform.position.x))
+        if (((transform.position.x < playerController.transform.position.x + .5f) && (transform.position.x > playerController.transform.position.x)) && targeted)
         {
             thisRigidbody.velocity = new Vector3(0, 0, maxVelocity);
             thisRigidbody.angularVelocity = new Vector3(0, 0, maxVelocity);
+        }
+
+        if (((transform.position.x < playerController.transform.position.x + .5f) && (transform.position.x > playerController.transform.position.x)) && !repositionDandelion)
+        {
+            thisRigidbody.velocity = new Vector3(0, 0, maxVelocity);
+            thisRigidbody.angularVelocity = new Vector3(0, 0, maxVelocity);
+            repositionDandelion = true;
+            Invoke("RepositionDandelion", 4f);
         }
 
         if (transform.position.z < playerController.transform.position.z)
@@ -125,6 +135,11 @@ public class ObjectConstantMovement : MonoBehaviour
         }
         //else if (transform.position.z - distanceFromPlayer < playerController.transform.position.z)
         
+    }
+
+    private void RepositionDandelion()
+    {
+        repositionDandelion = false;
     }
 
 }

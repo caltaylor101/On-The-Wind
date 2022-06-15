@@ -268,7 +268,7 @@ public class PlayerController : MonoBehaviour
         if (!restoreRotationTriggered)
         {
             restoreRotationTriggered = true;
-            CancelInvoke("RestoreRestoration");
+            CancelInvoke("RestoreRotation");
             Invoke("RestoreRotation", 3);
         }
     }
