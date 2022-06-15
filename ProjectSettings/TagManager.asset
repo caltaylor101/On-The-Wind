@@ -5,6 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - WindTunnel
+  - Obstacle
+  - Bounce
+  - ForwardBounce
+  - BackwardBounce
+  - VerticalWindTunnel
+  - AnimationTrigger1
+  - MaxHeightTrigger
+  - FluffCollectable
+  - LevelLoad
+  - Speed
   layers:
   - Default
   - TransparentFX
