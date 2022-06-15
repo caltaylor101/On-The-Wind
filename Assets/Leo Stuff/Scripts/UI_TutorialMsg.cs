@@ -47,7 +47,7 @@ public class UI_TutorialMsg : MonoBehaviour
     {
       lifeTimer += Time.deltaTime;
 
-      if (distance > ActivationDistance || lifeTimer >= MessageDuration)
+      if (distance > ActivationDistance && lifeTimer >= MessageDuration)
         DeactivateMessage();
     }
   }
