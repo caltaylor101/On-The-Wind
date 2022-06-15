@@ -420,14 +420,14 @@ public class PlayerController : MonoBehaviour
             {
                 thisRigidbody.AddForce(Vector3.back * 55);
                 thisRigidbody.AddForce(Vector3.up * 45);
-                secondsStopped = 2;
+                secondsStopped = 3;
             }
 
         }
 
         if (thisRigidbody.velocity.z > 1f)
         {
-            secondsStopped = 2;
+            secondsStopped = 3;
 
         }
 

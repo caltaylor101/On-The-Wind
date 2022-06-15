@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadNextScene : MonoBehaviour
 {
@@ -14,5 +15,13 @@ public class LoadNextScene : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider trigger)
+    {
+        if (trigger.tag == "Player")
+        {
+            SceneManager.LoadScene("Level2");
+        }
     }
 }
