@@ -386,7 +386,7 @@ public class PlayerController : MonoBehaviour
         {
             if (thisRigidbody.velocity.z < maxVelocity / 2)
             {
-                thisRigidbody.AddForce(Vector3.forward * speed * 5, ForceMode.Acceleration);
+                thisRigidbody.AddForce(Vector3.forward * speed * 7, ForceMode.Acceleration);
             }
             thisRigidbody.AddForce(Vector3.forward * speed, ForceMode.Acceleration);
         }
