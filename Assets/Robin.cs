@@ -10,7 +10,23 @@ public class Robin : MonoBehaviour
     private bool runAttack = false;
     [SerializeField] private float speed = 15;
     [SerializeField] private GameObject backObject;
+
+
+    public GameObject gameRun;
+    public RobinVariables robinVariables;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        gameRun = GameObject.Find("GameRun");
+        robinVariables = gameRun.GetComponent<RobinVariables>();
+        spotlight = robinVariables.spotlight;
+        //targetDandelion = robinVariables.targetDandelion;
+        speed = robinVariables.speed;
+        backObject = robinVariables.backObject;
+        transform.rotation = Quaternion.Euler(0, 180, 0);
+
+    }
     void Start()
     {
         dandelionList = GameObject.FindGameObjectsWithTag("OtherDandelion");
@@ -53,11 +69,20 @@ public class Robin : MonoBehaviour
         {
             Debug.Log("Destriyed Dandelion");
             Destroy(trigger.gameObject);
+            Invoke("DestroyRobin", 5);
+            
         }
         if (trigger.tag == "BackObject")
         {
+            robinVariables.robinSpawned = false;
             Destroy(gameObject);
         }
+        
+    }
+
+    private void DestroyRobin()
+    {
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -77,8 +102,6 @@ public class Robin : MonoBehaviour
             // collision.transform.Rotate(new Vector3(0, 180, 88.644f));
             //collision.transform.rotation = Quaternion.Euler(0, 180, 88.644f);
             collision.transform.localRotation = Quaternion.Euler(0, 180, 88.644f);
-
-
             //new Quaternion(0, 180, 88.644f, 0);
         }
     }
