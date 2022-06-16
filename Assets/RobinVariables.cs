@@ -20,7 +20,7 @@ public class RobinVariables : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("CreateRobin", robinStartTime, Random.Range(1, robinMaxTime));
+        InvokeRepeating("CreateRobin", robinStartTime, Random.Range(robinStartTime, robinMaxTime));
         CreateRobin();
     }
 

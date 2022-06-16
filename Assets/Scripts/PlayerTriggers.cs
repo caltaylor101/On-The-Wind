@@ -74,6 +74,7 @@ public class PlayerTriggers : MonoBehaviour
 
         if ((trigger.tag == verticalWindTunnelTag) && verticalWindTunnelEnter == false)
         {
+            Debug.Log("Windy!");
             //windTunnelEnter = true;
             playerController.thisRigidbody.AddForce(Vector3.up * verticalWindPower);
             //playerController.maxVelocity *= verticalWindPower;

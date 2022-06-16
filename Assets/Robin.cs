@@ -20,6 +20,10 @@ public class Robin : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("Player");
+        if (!player)
+        {
+            player = GameObject.Find("TestPlayer");
+        }
         gameRun = GameObject.Find("GameRun");
         robinVariables = gameRun.GetComponent<RobinVariables>();
         spotlight = robinVariables.spotlight;
@@ -32,7 +36,10 @@ public class Robin : MonoBehaviour
     void Start()
     {
         dandelionList = GameObject.FindGameObjectsWithTag("OtherDandelion");
-        Attack(AcquireTarget(dandelionList));
+        if (dandelionList.Length >= 1)
+        {
+            Attack(AcquireTarget(dandelionList));
+        }
     }
 
     // Update is called once per frame
@@ -56,7 +63,6 @@ public class Robin : MonoBehaviour
     {
         if (target)
         {
-            Debug.Log(target);
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Time.deltaTime * speed);
         }
         else
@@ -75,7 +81,6 @@ public class Robin : MonoBehaviour
     {
         if (trigger.gameObject == targetDandelion)
         {
-            Debug.Log("Destriyed Dandelion");
             Destroy(trigger.gameObject);
             Invoke("DestroyRobin", 5);
             

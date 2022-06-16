@@ -16,13 +16,12 @@ public class PlayerController : MonoBehaviour
     public float baseSpeed = 1;
     [SerializeField] public float speed = 2f;
     [SerializeField] public float upwardSpeed = 2f;
-    // [SerializeField] public float turnSpeed = 100f;\
     [SerializeField] public float maxVelocity = 20f;
     [SerializeField] public float maxSpeed = 20f;
     [SerializeField] public float dropForce = 20f;
     [SerializeField] public float staminaDecreaseRate = 10f;
     public int health = 1;
-    private float turnSpeed = 900f;
+    [SerializeField] private float turnSpeed = 900f;
     public float playerTurnVariable = .75f;
 
     private float horizontalInput;

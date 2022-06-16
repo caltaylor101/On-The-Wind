@@ -21,6 +21,5 @@ public class BackObject : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y + backObjectOffset, 0), Time.deltaTime * 15);
         }
-        Debug.Log(transform.position.y);
     }
 }
