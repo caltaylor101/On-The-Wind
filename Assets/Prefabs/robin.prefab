@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7571867767350690184}
   m_LocalRotation: {x: -0.29204997, y: -0.29204997, z: -0.64397734, w: 0.64397734}
-  m_LocalPosition: {x: 1.4868869, y: 6.594452, z: -6.677399}
+  m_LocalPosition: {x: 1.85, y: 4.93, z: -4.81}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -127,7 +127,7 @@ Transform:
   m_GameObject: {fileID: 7951571060420513469}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 501.8, y: 20.33, z: 59.95}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5864762031234174818}
@@ -160,9 +160,9 @@ MeshCollider:
   m_GameObject: {fileID: 7951571060420513469}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!23 &7104654988523680745
@@ -225,6 +225,8 @@ MonoBehaviour:
   targetDandelion: {fileID: 0}
   speed: 25
   backObject: {fileID: 0}
+  gameRun: {fileID: 0}
+  robinVariables: {fileID: 0}
 --- !u!1 &9000537245914001046
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9000537245914001046}
   m_LocalRotation: {x: 0.2477986, y: 3.880031e-24, z: 5.5022334e-17, w: 0.9688116}
-  m_LocalPosition: {x: 1.911466, y: 7.5325174, z: -5.224227}
+  m_LocalPosition: {x: 2.27, y: 5.87, z: -3.36}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
