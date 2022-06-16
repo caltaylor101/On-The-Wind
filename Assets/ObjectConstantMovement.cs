@@ -71,7 +71,6 @@ public class ObjectConstantMovement : MonoBehaviour
 
         if (transform.position.y < dandelionMidHeight)
         {
-            Debug.Log("hello");
             thisRigidbody.useGravity = false;
             thisRigidbody.AddForce(Vector3.up * Time.deltaTime * 12);
         }
@@ -107,6 +106,11 @@ public class ObjectConstantMovement : MonoBehaviour
         }
 
         if (((transform.position.x < playerController.transform.position.x + .5f) && (transform.position.x > playerController.transform.position.x)) && targeted)
+        {
+            thisRigidbody.velocity = new Vector3(0, 0, maxVelocity);
+            thisRigidbody.angularVelocity = new Vector3(0, 0, maxVelocity);
+        }
+        if (((transform.position.y < playerController.transform.position.y + .5f) && (transform.position.y > playerController.transform.position.y)) && targeted)
         {
             thisRigidbody.velocity = new Vector3(0, 0, maxVelocity);
             thisRigidbody.angularVelocity = new Vector3(0, 0, maxVelocity);
