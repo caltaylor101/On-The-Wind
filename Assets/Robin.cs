@@ -13,11 +13,13 @@ public class Robin : MonoBehaviour
 
 
     public GameObject gameRun;
+    public GameObject player;
     public RobinVariables robinVariables;
     // Start is called before the first frame update
 
     private void Awake()
     {
+        player = GameObject.Find("Player");
         gameRun = GameObject.Find("GameRun");
         robinVariables = gameRun.GetComponent<RobinVariables>();
         spotlight = robinVariables.spotlight;
@@ -39,6 +41,12 @@ public class Robin : MonoBehaviour
         if (runAttack)
         {
             Attack(targetDandelion);
+        }
+
+        if (transform.position.z + 3f < player.transform.position.z)
+        {
+            Destroy(targetDandelion);
+            Destroy(gameObject);
         }
     }
 
@@ -77,7 +85,25 @@ public class Robin : MonoBehaviour
             robinVariables.robinSpawned = false;
             Destroy(gameObject);
         }
-        
+        /*
+        if (trigger.gameObject.tag == "Player")
+        {
+            Destroy(trigger.gameObject.GetComponent<Rigidbody>());
+            Destroy(trigger.gameObject.GetComponent<MeshCollider>());
+            Destroy(trigger.gameObject.GetComponent<CapsuleCollider>());
+            Destroy(trigger.gameObject.GetComponent<MeshRenderer>());
+            Destroy(trigger.gameObject.GetComponent<PlayerTriggers>());
+            Destroy(trigger.gameObject.GetComponent<PlayerController>());
+            Destroy(trigger.gameObject.GetComponent<MeshRenderer>());
+
+            trigger.transform.parent = gameObject.transform;
+            trigger.transform.localPosition = new Vector3(1.484f, 2.728f, 2.21f);
+            // trigger.transform.Rotate(new Vector3(0, 180, 88.644f));
+            //trigger.transform.rotation = Quaternion.Euler(0, 180, 88.644f);
+            trigger.transform.localRotation = Quaternion.Euler(0, 180, 93.021f);
+            //new Quaternion(0, 180, 88.644f, 0);
+        }*/
+
     }
 
     private void DestroyRobin()
@@ -87,7 +113,7 @@ public class Robin : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        /*if (collision.gameObject.tag == "Player")
         {
             Destroy(collision.gameObject.GetComponent<Rigidbody>());
             Destroy(collision.gameObject.GetComponent<MeshCollider>());
@@ -98,12 +124,12 @@ public class Robin : MonoBehaviour
             Destroy(collision.gameObject.GetComponent<MeshRenderer>());
 
             collision.transform.parent = gameObject.transform;
-            collision.transform.localPosition = new Vector3(1.49f, 4.37f, .41f);
+            collision.transform.localPosition = new Vector3(1.484f, 2.728f, 2.21f);
             // collision.transform.Rotate(new Vector3(0, 180, 88.644f));
             //collision.transform.rotation = Quaternion.Euler(0, 180, 88.644f);
-            collision.transform.localRotation = Quaternion.Euler(0, 180, 88.644f);
+            collision.transform.localRotation = Quaternion.Euler(0, 180, 93.021f);
             //new Quaternion(0, 180, 88.644f, 0);
-        }
+        }*/
     }
 
     private GameObject AcquireTarget(GameObject[] list)

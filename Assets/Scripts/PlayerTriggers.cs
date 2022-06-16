@@ -19,6 +19,8 @@ public class PlayerTriggers : MonoBehaviour
     private bool animationStart = false;
     private bool destinationTriggered = false;
     private Vector3 destination = new Vector3(-11.56f, 12.32f, 94.34f);
+
+    [SerializeField] GameObject backObject;
     void Start()
     {
         
@@ -106,6 +108,25 @@ public class PlayerTriggers : MonoBehaviour
             Destroy(part1);
             Destroy(part3);
             Destroy(GameObject.Find("Part2"));
+        }
+
+        if (trigger.gameObject.tag == "Bird")
+        {
+            Destroy(gameObject.GetComponent<Rigidbody>());
+            Destroy(gameObject.GetComponent<MeshCollider>());
+            Destroy(gameObject.GetComponent<CapsuleCollider>());
+            Destroy(gameObject.GetComponent<MeshRenderer>());
+            Destroy(gameObject.GetComponent<PlayerTriggers>());
+            Destroy(gameObject.GetComponent<PlayerController>());
+            Destroy(gameObject.GetComponent<MeshRenderer>());
+
+            gameObject.transform.parent = trigger.gameObject.transform.parent;
+            transform.localPosition = new Vector3(1.484f, 2.728f, 2.21f);
+            // trigger.transform.Rotate(new Vector3(0, 180, 88.644f));
+            //trigger.transform.rotation = Quaternion.Euler(0, 180, 88.644f);
+            transform.localRotation = Quaternion.Euler(0, 180, 93.021f);
+            //new Quaternion(0, 180, 88.644f, 0);
+            backObject.transform.position = new Vector3(backObject.transform.position.x, 100, backObject.transform.position.z);
         }
     }
 

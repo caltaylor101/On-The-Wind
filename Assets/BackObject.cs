@@ -16,7 +16,7 @@ public class BackObject : MonoBehaviour
     {
         if (player)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y - 1.75f, 0), Time.deltaTime * 15);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y - 5.75f, 0), Time.deltaTime * 15);
         }
     }
 }

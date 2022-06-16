@@ -20,7 +20,7 @@ public class RobinVariables : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //InvokeRepeating("CreateRobin", robinStartTime, Random.Range(1, robinMaxTime));
+        InvokeRepeating("CreateRobin", robinStartTime, Random.Range(1, robinMaxTime));
         CreateRobin();
     }
 
@@ -37,7 +37,7 @@ public class RobinVariables : MonoBehaviour
         //{
             robinSpawned = true;
             speed = Random.Range(speed, maxSpeed);
-            Instantiate(robinPrefab, new Vector3(player.transform.position.x, player.transform.position.y + 10, player.transform.position.z + 200), Quaternion.identity);
+            Instantiate(robinPrefab, new Vector3(player.transform.position.x + Random.Range(-5, 5), player.transform.position.y + Random.Range(8, 15), player.transform.position.z + Random.Range(150, 200)), Quaternion.identity);
         //}
     }
 }

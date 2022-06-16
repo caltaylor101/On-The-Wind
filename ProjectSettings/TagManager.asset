@@ -17,6 +17,7 @@ TagManager:
   - Speed
   - OtherDandelion
   - BackObject
+  - Bird
   layers:
   - Default
   - TransparentFX
