@@ -110,10 +110,10 @@ public class ObjectConstantMovement : MonoBehaviour
             thisRigidbody.velocity = new Vector3(0, 0, maxVelocity);
             thisRigidbody.angularVelocity = new Vector3(0, 0, maxVelocity);
         }
-        if (((transform.position.y < playerController.transform.position.y + .5f) && (transform.position.y > playerController.transform.position.y)) && targeted)
+      
+        if (targeted)
         {
-            thisRigidbody.velocity = new Vector3(0, 0, maxVelocity);
-            thisRigidbody.angularVelocity = new Vector3(0, 0, maxVelocity);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerController.transform.position.x, playerController.transform.position.y, transform.position.z), 20);
         }
 
         if (((transform.position.x < playerController.transform.position.x + .5f) && (transform.position.x > playerController.transform.position.x)) && !repositionDandelion)
@@ -137,6 +137,8 @@ public class ObjectConstantMovement : MonoBehaviour
         {
             thisRigidbody.AddForce(Vector3.forward * Time.deltaTime * 20);
         }
+
+        
         //else if (transform.position.z - distanceFromPlayer < playerController.transform.position.z)
         
     }

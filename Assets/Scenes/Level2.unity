@@ -1438,6 +1438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 334285708}
   - component: {fileID: 334285709}
+  - component: {fileID: 334285710}
   m_Layer: 0
   m_Name: BackObject
   m_TagString: BackObject
@@ -1473,6 +1474,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &334285710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334285707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c954876d3cc5ec34c833aa0c2b7bd697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1122179869}
 --- !u!1001 &338432279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11899,6 +11913,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7104654988523680744, guid: df444da3a911bfd4abc8daed50146de9, type: 3}
+      propertyPath: speed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104654988523680744, guid: df444da3a911bfd4abc8daed50146de9, type: 3}
       propertyPath: spotlight
       value: 
       objectReference: {fileID: 1387017645}
@@ -11911,6 +11929,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7283014855636046855, guid: df444da3a911bfd4abc8daed50146de9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283014855636046855, guid: df444da3a911bfd4abc8daed50146de9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283014855636046855, guid: df444da3a911bfd4abc8daed50146de9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283014855636046855, guid: df444da3a911bfd4abc8daed50146de9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 501.8
       objectReference: {fileID: 0}
@@ -11920,7 +11950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7283014855636046855, guid: df444da3a911bfd4abc8daed50146de9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7283014855636046855, guid: df444da3a911bfd4abc8daed50146de9, type: 3}
       propertyPath: m_LocalRotation.w

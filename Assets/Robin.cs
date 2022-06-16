@@ -51,6 +51,7 @@ public class Robin : MonoBehaviour
     {
         if (trigger.gameObject == targetDandelion)
         {
+            Debug.Log("Destriyed Dandelion");
             Destroy(trigger.gameObject);
         }
         if (trigger.tag == "BackObject")
@@ -58,11 +59,17 @@ public class Robin : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("HIT PLAYER");
+    }
+
     private GameObject AcquireTarget(GameObject[] list)
     {
         int randomNumber = Random.Range(1, (list.Length - 1));
         spotlight.GetComponent<DandelionSpotlight>().targetDandelion = list[randomNumber];
+        list[randomNumber].GetComponent<ObjectConstantMovement>().targeted = true;
         targetDandelion = list[randomNumber];
         runAttack = true;
         return list[randomNumber];
