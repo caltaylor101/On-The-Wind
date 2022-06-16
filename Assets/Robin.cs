@@ -62,7 +62,25 @@ public class Robin : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("HIT PLAYER");
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(collision.gameObject.GetComponent<Rigidbody>());
+            Destroy(collision.gameObject.GetComponent<MeshCollider>());
+            Destroy(collision.gameObject.GetComponent<CapsuleCollider>());
+            Destroy(collision.gameObject.GetComponent<MeshRenderer>());
+            Destroy(collision.gameObject.GetComponent<PlayerTriggers>());
+            Destroy(collision.gameObject.GetComponent<PlayerController>());
+            Destroy(collision.gameObject.GetComponent<MeshRenderer>());
+
+            collision.transform.parent = gameObject.transform;
+            collision.transform.localPosition = new Vector3(1.49f, 4.37f, .41f);
+            // collision.transform.Rotate(new Vector3(0, 180, 88.644f));
+            //collision.transform.rotation = Quaternion.Euler(0, 180, 88.644f);
+            collision.transform.localRotation = Quaternion.Euler(0, 180, 88.644f);
+
+
+            //new Quaternion(0, 180, 88.644f, 0);
+        }
     }
 
     private GameObject AcquireTarget(GameObject[] list)

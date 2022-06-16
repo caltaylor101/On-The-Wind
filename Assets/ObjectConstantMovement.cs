@@ -32,7 +32,10 @@ public class ObjectConstantMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ConstantMovement();
+        if (playerController)
+        {
+            ConstantMovement();
+        }
     }
 
     private void ConstantMovement()
