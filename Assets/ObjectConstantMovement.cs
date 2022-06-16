@@ -87,7 +87,7 @@ public class ObjectConstantMovement : MonoBehaviour
         
         if (thisRigidbody.velocity.z < maxVelocity)
         {
-            if (thisRigidbody.velocity.z < maxVelocity / 2)
+            if (thisRigidbody.velocity.z < maxVelocity / 1.5f)
             {
                 thisRigidbody.AddForce(Vector3.forward * speed * 7, ForceMode.Acceleration);
             }
@@ -116,7 +116,7 @@ public class ObjectConstantMovement : MonoBehaviour
       
         if (targeted)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerController.transform.position.x, playerController.transform.position.y, transform.position.z), 20);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerController.transform.position.x, playerController.transform.position.y, playerController.transform.position.z + distanceFromPlayer), 20);
         }
 
         if (((transform.position.x < playerController.transform.position.x + .5f) && (transform.position.x > playerController.transform.position.x)) && !repositionDandelion)
@@ -129,8 +129,14 @@ public class ObjectConstantMovement : MonoBehaviour
 
         if (transform.position.z < playerController.transform.position.z)
         {
-            maxVelocity *= 2;
+            maxVelocity = playerController.maxVelocity * 2;
         }
+        else
+        {
+            maxVelocity = playerController.maxVelocity / 2;
+        }
+
+        
 
         if ((transform.position.z - distanceFromPlayer) >= playerController.transform.position.z)
         {
@@ -148,7 +154,10 @@ public class ObjectConstantMovement : MonoBehaviour
 
     private void RepositionDandelion()
     {
-        repositionDandelion = false;
+        if (gameObject)
+        {
+            repositionDandelion = false;
+        }
     }
 
 }

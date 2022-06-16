@@ -35,6 +35,7 @@ public class PlayerTriggers : MonoBehaviour
             Animation1Start();
         }
 
+
     }
 
     private void LateUpdate()
@@ -145,6 +146,7 @@ public class PlayerTriggers : MonoBehaviour
         playerController.newAnimationBool = false;
         playerController.animatorNull = false;
         playerController.speed = 1;
+       
 
     }
 

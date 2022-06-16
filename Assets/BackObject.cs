@@ -6,17 +6,21 @@ public class BackObject : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
+    private float backObjectOffset;
     void Start()
     {
-        
+        backObjectOffset = -10.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        backObjectOffset -= Time.deltaTime * 1.5f;
+        
         if (player)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y - 5.75f, 0), Time.deltaTime * 15);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y + backObjectOffset, 0), Time.deltaTime * 15);
         }
+        Debug.Log(transform.position.y);
     }
 }
