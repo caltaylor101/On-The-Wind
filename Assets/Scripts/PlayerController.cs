@@ -221,13 +221,21 @@ public class PlayerController : MonoBehaviour
             if (firstMousePosition.y - secondMousePosition.y > 0)
             {
                 float powerCalculation = (windForce * firstMousePosition.y / Screen.height) - (windForce * secondMousePosition.y / Screen.height);
-                thisRigidbody.AddForce(Vector3.down * powerCalculation, ForceMode.Acceleration);
+                //thisRigidbody.AddForce(Vector3.down * powerCalculation, ForceMode.Acceleration);
+                if (speed > 0)
+                {
+                    thisRigidbody.AddForce(Vector3.back * powerCalculation * Time.deltaTime * 10);
+                    //speed = speed * -1;
+                    //baseSpeed = baseSpeed * -1;
+                }
             }
 
             if (firstMousePosition.y - secondMousePosition.y < 0)
             {
                 float powerCalculation = Mathf.Abs((windForce * firstMousePosition.y / Screen.height) - (windForce * secondMousePosition.y / Screen.height));
-                thisRigidbody.AddForce(Vector3.up * powerCalculation, ForceMode.Acceleration);
+                //thisRigidbody.AddForce(Vector3.up * powerCalculation, ForceMode.Acceleration);
+                speed = Mathf.Abs(speed);
+                baseSpeed = Mathf.Abs(baseSpeed);
             }
 
             if (firstMousePosition.x - secondMousePosition.x < 0)
@@ -339,7 +347,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                stamina += Time.deltaTime * 1;
+                stamina += Time.deltaTime * 2;
             }
         }
         if (Input.GetKey(KeyCode.A))
@@ -418,6 +426,7 @@ public class PlayerController : MonoBehaviour
             secondsStopped -= Time.deltaTime;
             if (secondsStopped <= 0)
             {
+                stamina -= 5;
                 thisRigidbody.AddForce(Vector3.back * 55);
                 thisRigidbody.AddForce(Vector3.up * 45);
                 secondsStopped = 3;

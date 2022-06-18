@@ -83,6 +83,7 @@ public class PlayerCollisions : MonoBehaviour
         Debug.Log("hit obstacle");
         Invoke("ReturnToBaseSpeed", 2);
         hitObstacle = false;
+        playerController.stamina -= 10;
     }
 
 }

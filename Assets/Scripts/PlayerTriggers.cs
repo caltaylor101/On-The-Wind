@@ -96,6 +96,7 @@ public class PlayerTriggers : MonoBehaviour
         if (trigger.tag == "FluffCollectable")
         {
             Destroy(trigger.gameObject);
+            playerController.stamina += 10;
         }
 
         if (trigger.tag == "LevelLoad")
