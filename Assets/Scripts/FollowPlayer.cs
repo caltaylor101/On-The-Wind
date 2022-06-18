@@ -29,7 +29,7 @@ public class FollowPlayer : MonoBehaviour
     private void LateUpdate()
     {
 
-        if (player.activeSelf)
+        if (player)
         {
             transform.position = player.transform.position + offset;
         }

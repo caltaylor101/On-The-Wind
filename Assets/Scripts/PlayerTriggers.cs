@@ -44,11 +44,11 @@ public class PlayerTriggers : MonoBehaviour
         {
             //Invoke("AnimationForce", 4);
             //playerController.animatorNull = false;
-            float delta = 3 * Time.deltaTime;
+            float delta = 5 * Time.deltaTime;
             Vector3 currentPosition = transform.position;
             Vector3 nextPosition = Vector3.MoveTowards(currentPosition, destination, delta);
-            transform.position = nextPosition;
             playerController.speed *= 0;
+            transform.position = nextPosition;
             if (currentPosition == destination)
             {
                 Debug.Log("DESTINATION TRIGGERED");
@@ -86,11 +86,11 @@ public class PlayerTriggers : MonoBehaviour
             {
                 animationStart = true;
             }
+            playerController.thisRigidbody.velocity *= 0;
+            playerController.speed *= 0;
             playerController.animationDelay = 1;
             playerController.newAnimationBool = true;
             playerController.thisRigidbody.useGravity = false;
-            playerController.thisRigidbody.velocity *= 0;
-            playerController.speed *= 0;
         }
 
         if (trigger.tag == "FluffCollectable")
@@ -148,8 +148,6 @@ public class PlayerTriggers : MonoBehaviour
         playerController.newAnimationBool = false;
         playerController.animatorNull = false;
         playerController.speed = 1;
-       
-
     }
 
     private void AnimationForce()

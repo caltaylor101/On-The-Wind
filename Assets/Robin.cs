@@ -54,6 +54,7 @@ public class Robin : MonoBehaviour
         if (transform.position.z + 3f < player.transform.position.z)
         {
             Destroy(targetDandelion);
+            
             Destroy(gameObject);
         }
     }
@@ -89,6 +90,7 @@ public class Robin : MonoBehaviour
         if (trigger.tag == "BackObject")
         {
             robinVariables.robinSpawned = false;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Destroy(gameObject);
         }
         /*
@@ -114,8 +116,8 @@ public class Robin : MonoBehaviour
 
     private void DestroyRobin()
     {
-        Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
