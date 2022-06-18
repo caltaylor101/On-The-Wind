@@ -5,14 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class UI_StartScreen : MonoBehaviour
 {
+  [SerializeField] private List<GameObject> SpriteObj;
+  [SerializeField] private List<GameObject> ParticleObj;
+
+
   [SerializeField] public string FirstLevel;
   [SerializeField] public float fadeOutDur;
-  [SerializeField] public float fadeInDur;  
+  [SerializeField] public float fadeInDur;
+  [SerializeField] public float changeSceneDur;
   private bool isTransition = false;
 
   private void Awake()
   {
-    GetComponent<CanvasGroup>().alpha = 0;
+    Color color = Color.clear;
+    foreach (GameObject o in SpriteObj) {
+      o.GetComponent<SpriteRenderer>().color = color;
+    }
   }
 
 
@@ -33,15 +41,26 @@ public class UI_StartScreen : MonoBehaviour
 
   private IEnumerator StartScene()
   {
+    Debug.Log("Starting Scene");
     //Fade Canvas and Objects
     float et = 0.0f;
+    Color color = Color.white;
 
     while (et < fadeOutDur)
     {
       et += Time.deltaTime;
-      GetComponent<CanvasGroup>().alpha = Mathf.Clamp01(et / fadeOutDur);
+      color.a = Mathf.Clamp01(et / fadeOutDur);
+      foreach (GameObject o in SpriteObj)
+      {
+        o.GetComponent<SpriteRenderer>().color = color;
+      }
+
       yield return null;
-      GetComponent<CanvasGroup>().alpha = 1;
+      color.a = 1;
+      foreach (GameObject o in SpriteObj)
+      {
+        o.GetComponent<SpriteRenderer>().color = color;
+      }
     }
   }
 
@@ -49,18 +68,41 @@ public class UI_StartScreen : MonoBehaviour
   {
     //Fade Canvas and Objects
     float et = 0.0f;
+    Color color = Color.white;
+
+    //Start Particle System
+    foreach (GameObject o in ParticleObj)
+    {
+      o.GetComponent<ParticleSystem>().Play();
+    }
 
     while (et < fadeOutDur)
     {
       et += Time.deltaTime;
-      GetComponent<CanvasGroup>().alpha = 1.0f - Mathf.Clamp01(et / fadeOutDur);
+      color.a = 1.0f - Mathf.Clamp01(et / fadeOutDur);
+      foreach (GameObject o in SpriteObj)
+      {
+        o.GetComponent<SpriteRenderer>().color = color;
+      }
+
       yield return null;
-      GetComponent<CanvasGroup>().alpha = 0;
+      color.a = 0;
+      foreach (GameObject o in SpriteObj)
+      {
+        o.GetComponent<SpriteRenderer>().color = color;
+      }
     }
+
+    while (et < changeSceneDur)
+    {
+      et += Time.deltaTime;
+      yield return null;
+    }
+
+    Debug.Log("Changing Scene");
 
     //Change Scene
     SceneManager.LoadScene(FirstLevel);
-
   }
 
 }
