@@ -412,8 +412,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if ((thisRigidbody.velocity.z < .2f) && !animatorNull)
+        if ((thisRigidbody.velocity.z < .1f) && animatorNull)
         {
+            Debug.Log("BACKUP!");
             secondsStopped -= Time.deltaTime;
             if (secondsStopped <= 0)
             {

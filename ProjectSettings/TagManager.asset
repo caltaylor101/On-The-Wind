@@ -19,6 +19,7 @@ TagManager:
   - BackObject
   - Bird
   - Music
+  - BounceMusic
   layers:
   - Default
   - TransparentFX
