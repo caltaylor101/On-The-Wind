@@ -65,9 +65,10 @@ public class PlayerTriggers : MonoBehaviour
             
             playerController.maxHeightTrigger = trigger.gameObject.GetComponent<HeightTriggerVariables>().maxHeightTrigger;
         }
-        if ((trigger.tag == windTunnelTag) && windTunnelEnter == false)
+        //if ((trigger.tag == windTunnelTag) && windTunnelEnter == false)
+        if ((trigger.tag == windTunnelTag))
         {
-            windTunnelEnter = true;
+            //windTunnelEnter = true;
             playerController.maxSpeed *= windPower;
             playerController.maxVelocity *= windPower;
         }
@@ -161,7 +162,8 @@ public class PlayerTriggers : MonoBehaviour
 
     private void OnTriggerExit(Collider trigger)
     {
-        if ((trigger.tag == windTunnelTag) && windTunnelEnter == true)
+        //if ((trigger.tag == windTunnelTag) && windTunnelEnter == true)
+        if ((trigger.tag == windTunnelTag))
         {
             windTunnelEnter = false;
             playerController.speed /= windPower;

@@ -576,6 +576,7 @@ MonoBehaviour:
   windPower: 3
   verticalWindPower: 0
   prologueScene: {fileID: 9100000, guid: 5071413c9a4565b4989a4f8afa0758c9, type: 2}
+  backObject: {fileID: 0}
 --- !u!114 &14343492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,6 +601,7 @@ MonoBehaviour:
   dropForce: 20
   staminaDecreaseRate: 10
   health: 1
+  turnSpeed: 900
   playerTurnVariable: 0.75
   thisRigidbody: {fileID: 0}
   playerGetsHurt: 0
@@ -43980,11 +43982,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 118842755}
+  - {fileID: 1814224412}
   - {fileID: 53300350}
   - {fileID: 102529124}
   - {fileID: 1317798249}
   - {fileID: 379588496}
-  - {fileID: 1814224412}
   - {fileID: 661244529}
   - {fileID: 1532286180}
   - {fileID: 224153334}
@@ -47265,7 +47267,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1667142172}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1815898017
 PrefabInstance:
@@ -55587,6 +55589,7 @@ MonoBehaviour:
   windPower: 3
   verticalWindPower: 15
   prologueScene: {fileID: 9100000, guid: 5071413c9a4565b4989a4f8afa0758c9, type: 2}
+  backObject: {fileID: 0}
 --- !u!114 &2009470163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55611,6 +55614,7 @@ MonoBehaviour:
   dropForce: 30
   staminaDecreaseRate: 10
   health: 1
+  turnSpeed: 900
   playerTurnVariable: 0.75
   thisRigidbody: {fileID: 0}
   playerGetsHurt: 0
@@ -59431,6 +59435,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4864309803197988131, guid: 2b4ea02af1ca47c48ac1ad131bf7dbf4, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5245197486835935129, guid: 2b4ea02af1ca47c48ac1ad131bf7dbf4, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -59449,15 +59457,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5245197486835935129, guid: 2b4ea02af1ca47c48ac1ad131bf7dbf4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.703
+      value: 4.81
       objectReference: {fileID: 0}
     - target: {fileID: 5245197486835935129, guid: 2b4ea02af1ca47c48ac1ad131bf7dbf4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.446
+      value: 6.72
       objectReference: {fileID: 0}
     - target: {fileID: 5245197486835935129, guid: 2b4ea02af1ca47c48ac1ad131bf7dbf4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 306.39438
+      value: 780.95
       objectReference: {fileID: 0}
     - target: {fileID: 5245197486835935129, guid: 2b4ea02af1ca47c48ac1ad131bf7dbf4, type: 3}
       propertyPath: m_LocalRotation.w
