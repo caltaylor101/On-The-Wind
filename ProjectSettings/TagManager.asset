@@ -18,6 +18,7 @@ TagManager:
   - OtherDandelion
   - BackObject
   - Bird
+  - Music
   layers:
   - Default
   - TransparentFX

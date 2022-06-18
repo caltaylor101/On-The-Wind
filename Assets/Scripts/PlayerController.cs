@@ -412,7 +412,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (thisRigidbody.velocity.z < 1f)
+        if ((thisRigidbody.velocity.z < .2f) && !animatorNull)
         {
             secondsStopped -= Time.deltaTime;
             if (secondsStopped <= 0)
