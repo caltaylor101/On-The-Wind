@@ -56,12 +56,14 @@ public class UI_StartScreen : MonoBehaviour
       }
 
       yield return null;
-      color.a = 1;
-      foreach (GameObject o in SpriteObj)
-      {
-        o.GetComponent<SpriteRenderer>().color = color;
-      }
     }
+
+    color.a = 1;
+    foreach (GameObject o in SpriteObj)
+    {
+      o.GetComponent<SpriteRenderer>().color = color;
+    }
+
   }
 
   private IEnumerator ChangeScene()
@@ -86,11 +88,12 @@ public class UI_StartScreen : MonoBehaviour
       }
 
       yield return null;
-      color.a = 0;
-      foreach (GameObject o in SpriteObj)
-      {
-        o.GetComponent<SpriteRenderer>().color = color;
-      }
+    }
+
+    color.a = 0;
+    foreach (GameObject o in SpriteObj)
+    {
+      o.GetComponent<SpriteRenderer>().color = color;
     }
 
     while (et < changeSceneDur)

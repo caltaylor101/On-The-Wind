@@ -14373,7 +14373,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &453094036
 Transform:
   m_ObjectHideFlags: 0
@@ -40918,8 +40918,8 @@ Transform:
   - {fileID: 1805727417}
   - {fileID: 1187872175}
   - {fileID: 1779825626}
-  - {fileID: 907246174}
   - {fileID: 1029013721}
+  - {fileID: 907246174}
   - {fileID: 2030743499}
   - {fileID: 1011710801}
   - {fileID: 1069973879}
@@ -40930,8 +40930,8 @@ Transform:
   - {fileID: 2025074534}
   - {fileID: 1158986617}
   - {fileID: 135687294}
-  - {fileID: 2118016176}
   - {fileID: 974188991}
+  - {fileID: 2118016176}
   - {fileID: 1443064223}
   - {fileID: 2018628069}
   m_Father: {fileID: 0}
@@ -58990,6 +58990,10 @@ PrefabInstance:
     - target: {fileID: 4406400867072731633, guid: dca2cda21fb9eb0489d52cd274e82a12, type: 3}
       propertyPath: FirstLevel
       value: Level1-Continued
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406400867072731633, guid: dca2cda21fb9eb0489d52cd274e82a12, type: 3}
+      propertyPath: fadeOutDur
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4406400867072731633, guid: dca2cda21fb9eb0489d52cd274e82a12, type: 3}
       propertyPath: changeSceneDur
