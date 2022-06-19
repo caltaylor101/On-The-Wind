@@ -7,13 +7,17 @@ public class UI_StartScreen : MonoBehaviour
 {
   [SerializeField] private List<GameObject> SpriteObj;
   [SerializeField] private List<GameObject> ParticleObj;
+  [SerializeField] private GameObject AmbientObj;
 
 
   [SerializeField] public string FirstLevel;
-  [SerializeField] public float fadeOutDur;
   [SerializeField] public float fadeInDur;
+  [SerializeField] public float fadeOutDur;
   [SerializeField] public float changeSceneDur;
   private bool isTransition = false;
+
+  private AudioSource source;
+  [SerializeField] private float originalVolume;
 
   private void Awake()
   {
@@ -21,6 +25,9 @@ public class UI_StartScreen : MonoBehaviour
     foreach (GameObject o in SpriteObj) {
       o.GetComponent<SpriteRenderer>().color = color;
     }
+
+    source = AmbientObj.GetComponent<AudioSource>();
+    //originalVolume = source.volume;
   }
 
 
@@ -28,6 +35,7 @@ public class UI_StartScreen : MonoBehaviour
   void Start()
   {
     StartCoroutine(StartScene());
+    StartCoroutine(FadeAmbientIn());
   }
 
   // Update is called once per frame
@@ -36,8 +44,36 @@ public class UI_StartScreen : MonoBehaviour
     if(!isTransition && Input.GetMouseButtonDown(0))
     {
       StartCoroutine(ChangeScene());
+      StartCoroutine(FadeAmbientOut());
     }
   }
+
+  private IEnumerator FadeAmbientIn()
+  {
+    float et = 0.0f;
+
+    while (et < fadeInDur)
+    {
+      et += Time.deltaTime;
+      source.volume = originalVolume * (et / fadeInDur);
+      yield return null;
+      source.volume = originalVolume;
+    }
+  }
+
+  private IEnumerator FadeAmbientOut()
+  {
+    float et = 0.0f;
+
+    while (et < fadeOutDur)
+    {
+      et += Time.deltaTime;
+      source.volume = originalVolume - (originalVolume * (et / fadeOutDur));
+      yield return null;
+      source.volume = 0;
+    }
+  }
+
 
   private IEnumerator StartScene()
   {
@@ -46,10 +82,10 @@ public class UI_StartScreen : MonoBehaviour
     float et = 0.0f;
     Color color = Color.white;
 
-    while (et < fadeOutDur)
+    while (et < fadeInDur)
     {
       et += Time.deltaTime;
-      color.a = Mathf.Clamp01(et / fadeOutDur);
+      color.a = Mathf.Clamp01(et / fadeInDur);
       foreach (GameObject o in SpriteObj)
       {
         o.GetComponent<SpriteRenderer>().color = color;
