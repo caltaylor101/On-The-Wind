@@ -17,10 +17,14 @@ public class UI_Credits : MonoBehaviour
   [SerializeField] private bool DebugFlip = false;
 
   private bool isActivated = false;
+  private bool isFinished = false;
 
   private void Awake()
   {
     Color c;
+
+    isActivated = false;
+    isFinished = false;
 
     //Set alphas to 0
     foreach (GameObject text in TeamNameObj)
@@ -68,6 +72,10 @@ public class UI_Credits : MonoBehaviour
     }
   }
 
+  public bool isFadeDone()
+  {
+    return isFinished;
+  }
 
   private IEnumerator FadeIn()
   {
@@ -136,7 +144,7 @@ public class UI_Credits : MonoBehaviour
       img.GetComponent<Image>().color = c;
     }
 
-
+    isFinished = true;
   }
 
 
