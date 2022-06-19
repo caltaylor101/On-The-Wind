@@ -164,6 +164,12 @@ public class PlayerTriggers : MonoBehaviour
             //new Quaternion(0, 180, 88.644f, 0);
             backObject.transform.position = new Vector3(backObject.transform.position.x, 100, backObject.transform.position.z);
         }
+
+        if (trigger.gameObject.tag == "FinalAnimation")
+        {
+
+        }
+
     }
 
     private void Animation1Start()
