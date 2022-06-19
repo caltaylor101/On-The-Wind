@@ -20,6 +20,9 @@ TagManager:
   - Bird
   - Music
   - BounceMusic
+  - TutorialSpeed
+  - AnimationTrigger2
+  - SpeedTrigger2
   layers:
   - Default
   - TransparentFX

@@ -38,7 +38,7 @@ public class PlayerCollisions : MonoBehaviour
         {
             PlayerHitObstacle(collision);
         }
-
+        
         if ((collision.gameObject.tag == forwardBounceTag))
         {
             playerController.thisRigidbody.AddForce(Vector3.forward * forwardBounceForce);
@@ -53,15 +53,15 @@ public class PlayerCollisions : MonoBehaviour
             mushroomBounce.Play();
 
         }
-
         if ((collision.gameObject.tag == backwardBounceTag))
         {
             playerController.thisRigidbody.AddForce(Vector3.back * backwardBounceForce);
             playerController.thisRigidbody.AddForce(Vector3.up * backwardBounceForce);
             playerController.stamina = 100;
             mushroomBounce.Play();
-
         }
+
+        playerController.stamina -= 5;
 
     }
 

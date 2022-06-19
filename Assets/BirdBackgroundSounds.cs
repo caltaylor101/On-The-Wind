@@ -7,10 +7,12 @@ public class BirdBackgroundSounds : MonoBehaviour
 
     public AudioSource[] birdSounds;
     public bool playBirdSounds = false;
+    [SerializeField] private float playBirdSoundVar1;
+    [SerializeField] private float playBirdSoundVar2;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("PlayBirdSound", 1, 1);
+        InvokeRepeating("PlayBirdSound", playBirdSoundVar1, playBirdSoundVar2);
 
         InvokeRepeating("PlayBirdSoundsSwitch", 3, 5);
     }

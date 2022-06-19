@@ -18,8 +18,16 @@ public class UIHandler : MonoBehaviour
     void Update()
     {
         //player.GetComponent<PlayerController>().stamina
-            float staminaLeft = Mathf.Clamp01(player.GetComponent<PlayerController>().stamina / 100);
-            staminaBar.value = staminaLeft;
+        if (player)
+        {
+            if (player.GetComponent<PlayerController>())
+            {
+                float staminaLeft = Mathf.Clamp01(player.GetComponent<PlayerController>().stamina / 100);
+                staminaBar.value = staminaLeft;
+            }
+        }
+           
+            
             //loadingText.text = progress * 100f + "%";
     }
 }

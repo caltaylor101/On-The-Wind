@@ -49,12 +49,15 @@ public class PlayerTriggers : MonoBehaviour
             Vector3 nextPosition = Vector3.MoveTowards(currentPosition, destination, delta);
             playerController.speed *= 0;
             transform.position = nextPosition;
+            // where i'm replacing destination logic
+            /* 
             if (currentPosition == destination)
             {
                 Debug.Log("DESTINATION TRIGGERED");
                 destinationTriggered = true;
                 animationStart = false;
             }
+            */
         }
     }
 
@@ -75,9 +78,9 @@ public class PlayerTriggers : MonoBehaviour
 
         if ((trigger.tag == verticalWindTunnelTag) && verticalWindTunnelEnter == false)
         {
-            Debug.Log("Windy!");
             //windTunnelEnter = true;
             playerController.thisRigidbody.AddForce(Vector3.up * verticalWindPower);
+            playerController.stamina = 100;
             //playerController.maxVelocity *= verticalWindPower;
         }
         if ((trigger.tag == "AnimationTrigger1"))
@@ -91,6 +94,11 @@ public class PlayerTriggers : MonoBehaviour
             playerController.animationDelay = 1;
             playerController.newAnimationBool = true;
             playerController.thisRigidbody.useGravity = false;
+        }
+        if ((trigger.tag == "AnimationTrigger2"))
+        {
+            destinationTriggered = true;
+            animationStart = false;
         }
 
         if (trigger.tag == "FluffCollectable")
@@ -113,6 +121,26 @@ public class PlayerTriggers : MonoBehaviour
             Destroy(part3);
             Destroy(GameObject.Find("Part2"));
         }
+        if (trigger.tag == "SpeedTrigger2")
+        {
+            playerController.baseSpeed = 5;
+            playerController.maxVelocity = 3.5f;
+            //Destroy(part1);
+            //Destroy(part3);
+            //Destroy(GameObject.Find("Part2"));
+        }
+
+        if (trigger.tag == "TutorialSpeed")
+        {
+            playerController.baseSpeed = 5;
+            playerController.maxVelocity = 2;
+            playerController.thisRigidbody.AddForce(Vector3.back * playerController.speed * 10);
+            //Destroy(part1);
+            //Destroy(part3);
+            //Destroy(GameObject.Find("Part2"));
+        }
+
+
 
         if (trigger.gameObject.tag == "Bird")
         {
