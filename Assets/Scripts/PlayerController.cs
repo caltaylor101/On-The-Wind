@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float maxSpeed = 20f;
     [SerializeField] public float dropForce = 20f;
     [SerializeField] public float staminaDecreaseRate = 10f;
+    [SerializeField] public float backupSpeed = 30f;
+    [SerializeField] public float floatUpSpeed = 10f;
     public int health = 1;
     [SerializeField] private float turnSpeed = 900f;
     public float playerTurnVariable = .75f;
@@ -376,10 +378,12 @@ public class PlayerController : MonoBehaviour
             thisRigidbody.AddForce(Vector3.right * Time.deltaTime * turnSpeed * thisRigidbody.mass * playerTurnVariable);
         }
 
-        if (Input.GetKey(KeyCode.S) && breakingEnabled)
+        if (Input.GetKey(KeyCode.S))
         {
-            slowDownBool = true;
-            thisRigidbody.AddForce(Vector3.down * speed * massSlowDownVariable * thisRigidbody.mass, ForceMode.Force);
+            //slowDownBool = true;
+            thisRigidbody.AddForce(Vector3.back * Time.deltaTime * backupSpeed, ForceMode.Force);
+            thisRigidbody.AddForce(Vector3.up * Time.deltaTime * floatUpSpeed);
+            stamina -= Time.deltaTime * staminaDecreaseRate/2;
             //GetComponent<Rigidbody>().velocity *= .3f;
         }
 
@@ -392,6 +396,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp("space"))
         {
             speed = baseSpeed;
+
         }
 
         if (animatorNull && speed < baseSpeed)
@@ -435,7 +440,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if ((thisRigidbody.velocity.z < .1f) && animatorNull)
+        /*if ((thisRigidbody.velocity.z < .1f) && animatorNull)
         {
             Debug.Log("BACKUP!");
             secondsStopped -= Time.deltaTime;
@@ -447,7 +452,7 @@ public class PlayerController : MonoBehaviour
                 secondsStopped = 3;
             }
 
-        }
+        }*/
 
         if (thisRigidbody.velocity.z > 1f)
         {

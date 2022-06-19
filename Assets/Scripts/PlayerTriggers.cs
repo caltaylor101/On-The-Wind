@@ -191,7 +191,7 @@ public class PlayerTriggers : MonoBehaviour
         GetComponent<Animator>().runtimeAnimatorController = prologueScene;
         playerController.newAnimationBool = false;
         playerController.animatorNull = false;
-        playerController.speed = 1;
+        playerController.speed = 0;
     }
 
     private void AnimationForce()
