@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerTriggers : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class PlayerTriggers : MonoBehaviour
     private Vector3 destination = new Vector3(-11.56f, 12.32f, 94.34f);
 
     [SerializeField] GameObject backObject;
+    [SerializeField] AudioSource windTunnelAudio;
     void Start()
     {
         
@@ -75,6 +77,7 @@ public class PlayerTriggers : MonoBehaviour
             //windTunnelEnter = true;
             playerController.maxSpeed *= windPower;
             playerController.maxVelocity *= windPower;
+            windTunnelAudio.Play();
         }
 
         if ((trigger.tag == verticalWindTunnelTag) && verticalWindTunnelEnter == false)
@@ -82,6 +85,8 @@ public class PlayerTriggers : MonoBehaviour
             //windTunnelEnter = true;
             playerController.thisRigidbody.AddForce(Vector3.up * verticalWindPower);
             playerController.stamina = 100;
+            windTunnelAudio.Play();
+
             //playerController.maxVelocity *= verticalWindPower;
         }
 
@@ -167,7 +172,7 @@ public class PlayerTriggers : MonoBehaviour
 
         if (trigger.gameObject.tag == "FinalAnimation")
         {
-
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
     }

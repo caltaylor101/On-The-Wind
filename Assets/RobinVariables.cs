@@ -16,6 +16,9 @@ public class RobinVariables : MonoBehaviour
 
     [SerializeField] private float robinStartTime = 5;
     [SerializeField] private float robinMaxTime = 10;
+
+    public AudioSource birdBossSound1;
+    public AudioSource birdBossSound2;
     public bool robinSpawned = false;
     // Start is called before the first frame update
     void Start()
@@ -38,6 +41,7 @@ public class RobinVariables : MonoBehaviour
             robinSpawned = true;
             speed = Random.Range(speed, maxSpeed);
             Instantiate(robinPrefab, new Vector3(player.transform.position.x + Random.Range(-5, 5), player.transform.position.y + Random.Range(8, 15), player.transform.position.z + Random.Range(150, 200)), Quaternion.identity);
+        birdBossSound1.Play();
         //}
     }
 }
