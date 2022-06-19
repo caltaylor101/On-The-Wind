@@ -18,7 +18,7 @@ public class MainCameraFinalAnimScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //GameObject.Find("Credits2PCanvas").GetComponent<UI_Credits_Edit>().StartFadeIn();
     }
 
     // Update is called once per frame
