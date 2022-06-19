@@ -29,17 +29,6 @@ public class PlayerTriggers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (destinationTriggered)
-        {
-            destinationTriggered = false;
-            Animation1Start();
-        }
-
-
-    }
-
-    private void LateUpdate()
-    {
         if (animationStart)
         {
             //Invoke("AnimationForce", 4);
@@ -59,6 +48,18 @@ public class PlayerTriggers : MonoBehaviour
             }
             */
         }
+        if (destinationTriggered)
+        {
+            destinationTriggered = false;
+            Animation1Start();
+        }
+
+
+    }
+
+    private void LateUpdate()
+    {
+        
     }
 
     private void OnTriggerEnter(Collider trigger)
@@ -83,6 +84,9 @@ public class PlayerTriggers : MonoBehaviour
             playerController.stamina = 100;
             //playerController.maxVelocity *= verticalWindPower;
         }
+
+        //Redoing animation triggers
+
         if ((trigger.tag == "AnimationTrigger1"))
         {
             if (!destinationTriggered)
