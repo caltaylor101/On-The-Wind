@@ -105,7 +105,7 @@ public class UI_StartScreen : MonoBehaviour
     Debug.Log("Changing Scene");
 
     //Change Scene
-    SceneManager.LoadScene(FirstLevel);
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
   }
 
 }

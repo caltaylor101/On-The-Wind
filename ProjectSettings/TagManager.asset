@@ -18,6 +18,12 @@ TagManager:
   - OtherDandelion
   - BackObject
   - Bird
+  - Music
+  - BounceMusic
+  - TutorialSpeed
+  - AnimationTrigger2
+  - SpeedTrigger2
+  - FinalAnimation
   layers:
   - Default
   - TransparentFX

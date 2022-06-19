@@ -16,6 +16,7 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] private float forwardBounceForce = 35;
     [SerializeField] private float bounceForce = 80;
     [SerializeField] private float backwardBounceForce = 35;
+    [SerializeField] AudioSource mushroomBounce;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,26 +38,30 @@ public class PlayerCollisions : MonoBehaviour
         {
             PlayerHitObstacle(collision);
         }
-
+        
         if ((collision.gameObject.tag == forwardBounceTag))
         {
             playerController.thisRigidbody.AddForce(Vector3.forward * forwardBounceForce);
             playerController.thisRigidbody.AddForce(Vector3.up * forwardBounceForce);
-            playerController.stamina = 100; 
+            playerController.stamina = 100;
+            mushroomBounce.Play();
         }
         if ((collision.gameObject.tag == bounceTag))
         {
             playerController.thisRigidbody.AddForce(Vector3.up * bounceForce);
-            playerController.stamina = 100; 
-        }
+            playerController.stamina = 100;
+            mushroomBounce.Play();
 
+        }
         if ((collision.gameObject.tag == backwardBounceTag))
         {
             playerController.thisRigidbody.AddForce(Vector3.back * backwardBounceForce);
             playerController.thisRigidbody.AddForce(Vector3.up * backwardBounceForce);
             playerController.stamina = 100;
-
+            mushroomBounce.Play();
         }
+
+        playerController.stamina -= 5;
 
     }
 
@@ -78,6 +83,7 @@ public class PlayerCollisions : MonoBehaviour
         Debug.Log("hit obstacle");
         Invoke("ReturnToBaseSpeed", 2);
         hitObstacle = false;
+        playerController.stamina -= 10;
     }
 
 }

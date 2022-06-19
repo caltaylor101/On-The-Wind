@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -68,6 +69,9 @@ public class PlayerController : MonoBehaviour
 
     private float secondsStopped = 3;
 
+    private bool staminaEmpty = false;
+
+    [SerializeField] private GameObject quitMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +95,17 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
+        if (Input.GetKey("escape"))
+        {
+            quitMenu.SetActive(!quitMenu.activeSelf);
+        }
+
+        if (stamina <= 0)
+        {
+            staminaEmpty = true;
+            Invoke("ReloadScene", 3);
+        }
+
         if (GetComponent<Animator>() == null && !animatorNull)
         {
             //thisRigidbody.AddForce(Vector3.up * 5, ForceMode.Acceleration);
@@ -100,7 +115,7 @@ public class PlayerController : MonoBehaviour
             Invoke("AfterAnimationForce", animationDelay );
             //thisRigidbody.AddForce(Vector3.up * 15, ForceMode.Acceleration);
         }
-        if (animatorNull || newAnimationBool)
+        if ((animatorNull || newAnimationBool) && !staminaEmpty)
         {
             PlayerControlInputs();
         }
@@ -221,13 +236,21 @@ public class PlayerController : MonoBehaviour
             if (firstMousePosition.y - secondMousePosition.y > 0)
             {
                 float powerCalculation = (windForce * firstMousePosition.y / Screen.height) - (windForce * secondMousePosition.y / Screen.height);
-                thisRigidbody.AddForce(Vector3.down * powerCalculation, ForceMode.Acceleration);
+                //thisRigidbody.AddForce(Vector3.down * powerCalculation, ForceMode.Acceleration);
+                if (speed > 0)
+                {
+                    thisRigidbody.AddForce(Vector3.back * powerCalculation * Time.deltaTime * 20);
+                    //speed = speed * -1;
+                    //baseSpeed = baseSpeed * -1;
+                }
             }
 
             if (firstMousePosition.y - secondMousePosition.y < 0)
             {
                 float powerCalculation = Mathf.Abs((windForce * firstMousePosition.y / Screen.height) - (windForce * secondMousePosition.y / Screen.height));
-                thisRigidbody.AddForce(Vector3.up * powerCalculation, ForceMode.Acceleration);
+                thisRigidbody.AddForce(Vector3.forward * powerCalculation, ForceMode.Acceleration);
+                speed = Mathf.Abs(speed);
+                baseSpeed = Mathf.Abs(baseSpeed);
             }
 
             if (firstMousePosition.x - secondMousePosition.x < 0)
@@ -339,7 +362,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                stamina += Time.deltaTime * 1;
+                stamina += Time.deltaTime * 2;
             }
         }
         if (Input.GetKey(KeyCode.A))
@@ -412,11 +435,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (thisRigidbody.velocity.z < 1f)
+        if ((thisRigidbody.velocity.z < .1f) && animatorNull)
         {
+            Debug.Log("BACKUP!");
             secondsStopped -= Time.deltaTime;
             if (secondsStopped <= 0)
             {
+                stamina -= 5;
                 thisRigidbody.AddForce(Vector3.back * 55);
                 thisRigidbody.AddForce(Vector3.up * 45);
                 secondsStopped = 3;
@@ -440,5 +465,10 @@ public class PlayerController : MonoBehaviour
         {
             return Mathf.Abs(nr1 - nr2);
         }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
  
 }

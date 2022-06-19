@@ -8,6 +8,9 @@ public class VolumeFade : MonoBehaviour
   [SerializeField] private float fadeInTime = 2;
   [SerializeField] private float fadeOutTime = 2;
   [SerializeField] private bool EnableDebugInputs = false;
+  [SerializeField] AudioSource baseMusic;
+  [SerializeField] AudioSource bounceMusic;
+  [SerializeField] AudioSource weatherMusic;
 
   private bool isFadeOut = false;
   private bool isFadeIn = false;
@@ -17,7 +20,6 @@ public class VolumeFade : MonoBehaviour
 
   private void Awake()
   {
-    source = GetComponent<AudioSource>();
   }
 
   // Start is called before the first frame update
@@ -26,8 +28,36 @@ public class VolumeFade : MonoBehaviour
     
   }
 
-  // Update is called once per frame
-  void Update()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player" && gameObject.tag == "Music")
+        {
+            Debug.Log("MusicStart");
+            source = baseMusic;
+            bounceMusic.volume = 0;
+            baseMusic.volume = 0;
+            weatherMusic.volume = 0;
+            StartMusic();
+            baseMusic.Play();
+            bounceMusic.Play();
+            weatherMusic.Play();
+        }
+
+        if (other.tag == "Player" && gameObject.tag == "BounceMusic")
+        {
+            Debug.Log("BounceMusicStart");
+            source = bounceMusic;
+            bounceMusic.volume = 0;
+            //baseMusic.volume = 0;
+            weatherMusic.volume = 0;
+            StartMusic();
+        }
+
+
+    }
+
+    // Update is called once per frame
+    void Update()
   {
     if (EnableDebugInputs)
     {
