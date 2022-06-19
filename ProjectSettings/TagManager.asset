@@ -23,6 +23,7 @@ TagManager:
   - TutorialSpeed
   - AnimationTrigger2
   - SpeedTrigger2
+  - FinalAnimation
   layers:
   - Default
   - TransparentFX
