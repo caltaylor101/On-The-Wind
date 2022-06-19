@@ -40570,7 +40570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406400867072731633, guid: dca2cda21fb9eb0489d52cd274e82a12, type: 3}
       propertyPath: fadeOutDur
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4406400867072731633, guid: dca2cda21fb9eb0489d52cd274e82a12, type: 3}
       propertyPath: changeSceneDur
